@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.ayato.gamefoundation": "https://github.com/YamadaAyato/MyUnityGameFramework.git?path=/Assets/GameFoundation",
     "com.unity.2d.animation": "13.0.4",
     "com.unity.2d.aseprite": "3.0.1",
     "com.unity.2d.psdimporter": "12.0.1",
