@@ -8,7 +8,9 @@ public class Timer : MonoBehaviour
 {
     public static Timer Instance { get; private set; }
 
-    [Tooltip("時間が終わったかどうか")]
+    /// <summary>
+    /// 終わった時の通知
+    /// </summary>
     public Action OnTimeUp;
 
     private float _currentTime;
