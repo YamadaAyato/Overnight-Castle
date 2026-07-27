@@ -6,14 +6,14 @@ using unityroom.Api;
 /// </summary>
 public class ScoreSender : MonoBehaviour
 {
-    [SerializeField] private int _bordNombar;
+    [SerializeField] private int _boardNumber;
 
     public void SendHighScore(int score) 
     {
         UnityroomApiClient.Instance.SendScore(
-            _bordNombar,
+            _boardNumber,
             score,
-            ScoreboardWriteMode.HighScoreAsc
+            ScoreboardWriteMode.HighScoreDesc
             );
     }
 }
