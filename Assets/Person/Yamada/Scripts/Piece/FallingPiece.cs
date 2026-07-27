@@ -27,13 +27,13 @@ public class FallingPiece : MonoBehaviour
     /// <summary>
     ///     ピースの初期化処理
     /// </summary>
-    /// <param name="grobalPiecePhysicsSettings">全体物理設定</param>
+    /// <param name="globalPiecePhysicsSettings">全体物理設定</param>
     /// <param name="deletePositionY">削除するY座標の閾値</param>
-    public void Initialize(GlobalPiecePhysicsSettings grobalPiecePhysicsSettings, float deletePositionY)
+    public void Initialize(GlobalPiecePhysicsSettings globalPiecePhysicsSettings, float deletePositionY)
     {
         PiecePhysicsSettings settings =
-            grobalPiecePhysicsSettings != null
-            ? grobalPiecePhysicsSettings.PiecePhysicsSettings
+            globalPiecePhysicsSettings != null
+            ? globalPiecePhysicsSettings.PiecePhysicsSettings
             : _piecePhysicsSettings;
 
         _deletePositionY = deletePositionY;

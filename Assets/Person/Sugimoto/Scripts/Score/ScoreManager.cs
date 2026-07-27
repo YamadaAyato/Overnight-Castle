@@ -5,20 +5,21 @@ using UnityEngine;
 /// </summary>
 public class ScoreManager : MonoBehaviour
 {
+    /// <summary>現在のキャッスルスコアの結果</summary>
+    public CastleScoreResult CastleScoreResult { get; private set; }
+
     /// <summary>現在のスコア</summary>
-    public int CurrentScore { get; private set; }
+    public int CurrentScore => CastleScoreResult.TotalScore;
+
     /// <summary>最高スコア</summary>
     public int MaxScore { get; private set; }
 
     [SerializeField]
     private ScoreSender _scoreSender;
 
-    /// <summary>
-    /// スコアを加算
-    /// </summary>
-    public void AddScore(int value)
+    public void SetCastleScoreResult(CastleScoreResult castleScoreResult)
     {
-        CurrentScore += value;
+        CastleScoreResult = castleScoreResult;
 
         if (CurrentScore > MaxScore)
         {
@@ -31,7 +32,7 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void ResetScore()
     {
-        CurrentScore = 0;
+        CastleScoreResult = default;
     }
 
     /// <summary>

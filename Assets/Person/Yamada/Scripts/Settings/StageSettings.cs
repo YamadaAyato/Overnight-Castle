@@ -27,10 +27,13 @@ public class StageSettings : ScriptableObject
     public HeightSpawnTable[] HeightSpawnTables => _heightSpawnTables;
 
     /// <summary> 全体物理設定を使用するか </summary>
-    public bool UseGlobalPiecePhysicsSettings => _useGrobalPiecePhysicsSettings;
+    public bool UseGlobalPiecePhysicsSettings => _useGlobalPiecePhysicsSettings;
 
     /// <summary> 全体物理設定 </summary>
-    public GlobalPiecePhysicsSettings GlobalPiecePhysicsSettings => _grobalPiecePhysicsSettings;
+    public GlobalPiecePhysicsSettings GlobalPiecePhysicsSettings => _globalPiecePhysicsSettings;
+
+    /// <summary> 高さに応じたスコア倍率 </summary>
+    public float HeightScoreMultiplier => _heightScoreMultiplier;
 
     [Header("時間設定")]
     [SerializeField, Tooltip("ステージの制限時間")] private float _stageTimeLimit = 60f;
@@ -43,6 +46,9 @@ public class StageSettings : ScriptableObject
     [SerializeField, Tooltip("ステージの高さ")] private HeightSpawnTable[] _heightSpawnTables;
 
     [Header("全体物理設定")]
-    [SerializeField, Tooltip("全体物理設定を使用するか")] private bool _useGrobalPiecePhysicsSettings = false;
-    [SerializeField, Tooltip("全体物理設定")] private GlobalPiecePhysicsSettings _grobalPiecePhysicsSettings = null;
+    [SerializeField, Tooltip("全体物理設定を使用するか")] private bool _useGlobalPiecePhysicsSettings = false;
+    [SerializeField, Tooltip("全体物理設定")] private GlobalPiecePhysicsSettings _globalPiecePhysicsSettings = null;
+
+    [Header("スコア設定")]
+    [SerializeField, Tooltip("高さに応じたスコア倍率")] private float _heightScoreMultiplier = 10f;
 }

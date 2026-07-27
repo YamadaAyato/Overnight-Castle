@@ -2,10 +2,29 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///     ゲーム中の管理を行うクラス
+/// </summary>
 public class InGameManager : MonoBehaviour
 {
+    /// <summary> ゲームが終了しているかどうか </summary>
     public bool IsGameFinished => _isGameFinished;
 
+    /// <summary> 現在の城の高さ </summary>
+    public float CurrentHeight =>
+        CastleScoreCalculator.CalculateHeight(
+            _spawnedPieces,
+            _stageSettings.GroundPosY);
+
+    /// <summary> ピースの抽選補正設定 </summary>
+    public PieceSpawnModifiers Modifiers => _modifiers;
+
+    /// <summary> ゲーム終了時の通知 </summary>
+    public event Action OnGameFinished;
+
+    /// <summary>
+    ///     新しいピースを生成する
+    /// </summary>
     public void SpawnPiece()
     {
         if (_isGameFinished)
@@ -13,29 +32,24 @@ public class InGameManager : MonoBehaviour
             return;
         }
 
-        float currentHeight = CalculateCurrentHeight();
+        // 現在の高さに応じた抽選テーブルを取得する
+        FallingPiece piece = _spawner.SpawnPiece(
+            CurrentHeight,
+            _modifiers);
 
-        HeightSpawnTable spawnTable = GetSpawnTable(currentHeight);
-        FallingPiece prefab = SelectPieceByWeight(spawnTable);
-
-        if (prefab == null)
+        if (piece == null)
         {
-            Debug.LogError(
-                $"高さ{currentHeight:F1}に対応するピースを生成できませんでした。",
-                this);
-
+            Debug.LogError("ピースの生成に失敗しました。", this);
             return;
         }
-
-        FallingPiece piece = Instantiate(prefab, _spawnPoint.position, Quaternion.identity);
-        GlobalPiecePhysicsSettings globalPiecePhysicsSettings = GetGlobalPiecePhysicsSettings();
-
-        piece.Initialize(globalPiecePhysicsSettings, _stageSettings.DeletePositionY);
 
         _spawnedPieces.Add(piece);
         _controller.SetCurrentPiece(piece);
     }
 
+    /// <summary>
+    ///     ゲームを終了する
+    /// </summary>
     public void FinishGame()
     {
         if (_isGameFinished)
@@ -53,20 +67,45 @@ public class InGameManager : MonoBehaviour
                 piece.Fix();
             }
         }
+
+        // ゲーム終了時のスコアを計算する
+        CastleScoreResult result = CastleScoreCalculator.CalculateScore(
+            _spawnedPieces,
+            _stageSettings.GroundPosY,
+            _stageSettings.HeightScoreMultiplier);
+
+        _scoreManager.SetCastleScoreResult(result);
+        OnGameFinished?.Invoke();
+
+        Debug.Log($"ゲーム終了: 高さ={result.Height}, " +
+            $"高さスコア={result.HeightScore}, " +
+            $"完成度スコア={result.CompletionScore}, " +
+            $"合計スコア={result.TotalScore}");
     }
 
     [SerializeField] private PieceController _controller;
-    [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private PieceSpawner _spawner;
+    [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private StageSettings _stageSettings;
 
     private readonly List<FallingPiece> _spawnedPieces = new List<FallingPiece>();
+    private readonly PieceSpawnModifiers _modifiers = new();
 
     private bool _isWaitingForNextPiece;
     private bool _isGameFinished;
 
     private void Start()
     {
+        Debug.Log("ゲーム開始。", this);
+
         if (!ValidateSettings())
+        {
+            enabled = false;
+            return;
+        }
+
+        // Spawnerの初期化を行う
+        if (!_spawner.Initialize(_stageSettings))
         {
             enabled = false;
             return;
@@ -76,6 +115,10 @@ public class InGameManager : MonoBehaviour
         Timer.Instance.OnTimeUp += FinishGame;
 
         _controller.SetStageWidth(_stageSettings.StageWidth);
+        _controller.StartControl();
+        _scoreManager.ResetScore();
+        _modifiers.ResetAllWeightMultipliers();
+
         Timer.Instance.StartTimer(_stageSettings.StageTimeLimit);
         SpawnPiece();
     }
@@ -142,133 +185,6 @@ public class InGameManager : MonoBehaviour
     }
 
     /// <summary>
-    ///     現在の高さを計算する
-    /// </summary>
-    /// <returns>現在の高さ</returns>
-    private float CalculateCurrentHeight()
-    {
-        float highestPoitionY = _stageSettings.GroundPosY;
-
-        foreach (var piece in _spawnedPieces)
-        {
-            if (piece == null || !piece.HasLanded)
-            {
-                continue;
-            }
-
-            highestPoitionY = Mathf.Max(highestPoitionY, piece.HighestPositionY);
-        }
-
-        return Mathf.Max(0f, highestPoitionY - _stageSettings.GroundPosY);
-    }
-
-    /// <summary>
-    ///     現在の高さに応じたSpawnTableを取得する
-    /// </summary>
-    /// <param name="height">現在の高さ</param>
-    /// <returns>選択されたHeightSpawnTable</returns>
-    private HeightSpawnTable GetSpawnTable(float height)
-    {
-        HeightSpawnTable spawnTable = null;
-
-        // 高さに応じたSpawnTableを取得する
-        foreach (var table in _stageSettings.HeightSpawnTables)
-        {
-            // 高さが閾値を超えていない場合はスキップする
-            if (table == null || height < table.HeightThreshold)
-            {
-                continue;
-            }
-
-            // 高さが閾値を超えている場合は、最も高い閾値のSpawnTableを選択する
-            if (spawnTable == null ||
-                table.HeightThreshold > spawnTable.HeightThreshold)
-            {
-                spawnTable = table;
-            }
-        }
-
-        // SpawnTableが見つからなかった場合はエラーを出力する
-        if (spawnTable != null)
-        {
-            return spawnTable;
-        }
-
-        Debug.LogError($"HeightSpawnTableが見つかりませんでした。現在の高さ: {height}", this);
-
-        return null;
-    }
-
-    /// <summary>
-    ///     WeightedPieceの重みに応じて、FallingPieceを選択する
-    /// </summary>
-    /// <param name="spawnTable">高さに応じたSpawnTable</param>
-    /// <returns>選択されたFallingPiece</returns>
-    private FallingPiece SelectPieceByWeight(HeightSpawnTable spawnTable)
-    {
-        if (spawnTable == null || spawnTable.WeightedPieces == null || spawnTable.WeightedPieces.Length == 0)
-        {
-            Debug.LogError("WeightedPiecesが設定されていません。");
-            return null;
-        }
-
-        int totalWeight = 0;
-
-        // WeightedPieceの設定が有効かどうかを検証する
-        foreach (var weightedPiece in spawnTable.WeightedPieces)
-        {
-            if (!IsValidWeightedPiece(weightedPiece))
-            {
-                return null;
-            }
-            totalWeight += weightedPiece.SpawnWeight;
-        }
-
-        // 重みに応じてランダムにWeightedPieceを選択する
-        int randomValue = UnityEngine.Random.Range(0, totalWeight);
-
-        // 選択されたWeightedPieceに対応するFallingPieceを返す
-        foreach (var weightedPiece in spawnTable.WeightedPieces)
-        {
-            if (randomValue < weightedPiece.SpawnWeight)
-            {
-                return weightedPiece.PiecePrefab;
-            }
-
-            // 重みを減算して次のWeightedPieceの範囲に移動する
-            randomValue -= weightedPiece.SpawnWeight;
-        }
-
-        Debug.LogError("WeightedPieceの選択に失敗しました。");
-        return null;
-    }
-
-    /// <summary>
-    ///     全体物理設定を取得する
-    /// </summary>
-    /// <returns>全体物理設定</returns>
-    private GlobalPiecePhysicsSettings GetGlobalPiecePhysicsSettings()
-    {
-        if (!_stageSettings.UseGlobalPiecePhysicsSettings)
-        {
-            return null;
-        }
-
-        if (_stageSettings.GlobalPiecePhysicsSettings != null)
-        {
-            return _stageSettings.GlobalPiecePhysicsSettings;
-        }
-
-        Debug.LogWarning(
-            "全体物理設定を使用する設定ですが、" +
-            "GlobalPiecePhysicsSettingsが設定されていません。" +
-            "Prefab個別の物理設定を使用します。",
-            this);
-
-        return null;
-    }
-
-    /// <summary>
     ///     ゲームの初期化処理を行う
     /// </summary>
     /// <returns>設定が有効かどうか</returns>
@@ -279,9 +195,14 @@ public class InGameManager : MonoBehaviour
             Debug.LogError("PieceControllerが設定されていません。");
             return false;
         }
-        if (_spawnPoint == null)
+        if (_spawner == null)
         {
-            Debug.LogError("SpawnPointが設定されていません。");
+            Debug.LogError("Spawnerが設定されていません。");
+            return false;
+        }
+        if(_scoreManager == null)
+        {
+            Debug.LogError("ScoreManagerが設定されていません。");
             return false;
         }
         if (_stageSettings == null)
@@ -300,31 +221,6 @@ public class InGameManager : MonoBehaviour
             return false;
         }
 
-        return true;
-    }
-
-    /// <summary>
-    ///     WeightedPieceの設定が有効かどうかを検証する
-    /// </summary>
-    /// <param name="weightedPiece">重み付きのピース設定</param>
-    /// <returns>設定が有効かどうか</returns>
-    private static bool IsValidWeightedPiece(WeightedPiece weightedPiece)
-    {
-        if (weightedPiece == null)
-        {
-            Debug.LogError("WeightedPieceがnullです。");
-            return false;
-        }
-        if (weightedPiece.PiecePrefab == null)
-        {
-            Debug.LogError("WeightedPieceのPiecePrefabが設定されていません。");
-            return false;
-        }
-        if (weightedPiece.SpawnWeight <= 0)
-        {
-            Debug.LogError("WeightedPieceのWeightが0以下です。");
-            return false;
-        }
         return true;
     }
 }

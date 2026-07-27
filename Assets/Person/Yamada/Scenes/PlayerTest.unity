@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 128289740}
   - component: {fileID: 128289741}
+  - component: {fileID: 128289742}
   m_Layer: 0
   m_Name: InGameManager
   m_TagString: Untagged
@@ -164,8 +165,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGameManager
   _controller: {fileID: 1666114292}
-  _spawnPoint: {fileID: 1086705012}
+  _spawner: {fileID: 128289742}
+  _scoreManager: {fileID: 1464370517}
   _stageSettings: {fileID: 11400000, guid: 5d06f195712126b46ad69e8bb385815e, type: 2}
+--- !u!114 &128289742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128289739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa40905c45533149ac93efdb5a32067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PieceSpawner
+  _spawnPoint: {fileID: 1086705012}
 --- !u!1 &186715479
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,6 +256,7 @@ Transform:
   m_Children:
   - {fileID: 128289740}
   - {fileID: 1666114291}
+  - {fileID: 1464370515}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1056701773
@@ -444,6 +460,65 @@ Transform:
   - {fileID: 1643289776}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1464370514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1464370515}
+  - component: {fileID: 1464370517}
+  - component: {fileID: 1464370516}
+  m_Layer: 0
+  m_Name: Score
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1464370515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464370514}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 280228589}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1464370516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464370514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db0b9bcd9fb6c747947ade87b5a3776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreSender
+  _boardNumber: 0
+--- !u!114 &1464370517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464370514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3bc504996840e4cb811071336d5293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+  _scoreSender: {fileID: 1464370516}
 --- !u!1 &1643289775
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +668,7 @@ GameObject:
   - component: {fileID: 1666114291}
   - component: {fileID: 1666114293}
   - component: {fileID: 1666114292}
+  - component: {fileID: 1666114294}
   m_Layer: 0
   m_Name: PieceController
   m_TagString: Untagged
@@ -659,6 +735,19 @@ MonoBehaviour:
   m_DefaultActionMap: OverNightCastle
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 1056701775}
+--- !u!114 &1666114294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666114290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb0cd0ff0affab498048961c69ceac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PieceInputReader
+  _controller: {fileID: 1666114292}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

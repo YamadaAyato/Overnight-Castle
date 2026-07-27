@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
     /// <summary>
     /// 終わった時の通知
     /// </summary>
-    public Action OnTimeUp;
+    public event Action OnTimeUp;
 
     private float _currentTime;
     private bool _isRunning;
@@ -42,6 +42,13 @@ public class Timer : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null &&
+            Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
     }
 
@@ -56,6 +63,14 @@ public class Timer : MonoBehaviour
         if (_currentTime <= 0)
         {
             TimerReset();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
         }
     }
 
