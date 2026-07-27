@@ -46,19 +46,14 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         if (!_isRunning) 
-        {
-            StartTimer(10);
             return;
-        }
             
 
         _currentTime -= Time.deltaTime;
-        Debug.Log(_currentTime);
 
         if (_currentTime <= 0)
         {
             TimerReset();
-            Debug.Log("おわり");
         }
     }
 
