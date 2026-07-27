@@ -10,9 +10,6 @@ public class ScoreManager : MonoBehaviour
     /// <summary>最高スコア</summary>
     public int MaxScore { get; private set; }
 
-    /// <summary>現在のスコア</summary>
-    public int Score { get; private set; }
-
     [SerializeField]
     private ScoreSender _scoreSender;
 
@@ -34,7 +31,7 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void ResetScore()
     {
-        Score = 0;
+        CurrentScore = 0;
     }
 
     /// <summary>
