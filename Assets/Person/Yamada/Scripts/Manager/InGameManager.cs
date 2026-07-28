@@ -32,9 +32,11 @@ public class InGameManager : MonoBehaviour
             return;
         }
 
+        float currentHeight = CalculateCurrentHeight();
+
         // 現在の高さに応じた抽選テーブルを取得する
         FallingPiece piece = _spawner.SpawnPiece(
-            CurrentHeight,
+            currentHeight,
             _modifiers);
 
         if (piece == null)
@@ -182,6 +184,32 @@ public class InGameManager : MonoBehaviour
         }
 
         SpawnPiece();
+    }
+
+    /// <summary>
+    ///     現在の城の高さを計算する
+    /// </summary>
+    /// <returns>現在の城の高さ</returns>
+    private float CalculateCurrentHeight()
+    {
+        float highestPositionY = _stageSettings.GroundPosY;
+
+        foreach (var piece in _spawnedPieces)
+        {
+            if (piece == null ||!piece.HasLanded)
+            {
+                continue;
+            }
+
+            highestPositionY = Mathf.Max(
+                highestPositionY,
+                piece.HighestPositionY);
+        }
+
+        return Mathf.Max(
+            0f,
+            highestPositionY -
+            _stageSettings.GroundPosY);
     }
 
     /// <summary>

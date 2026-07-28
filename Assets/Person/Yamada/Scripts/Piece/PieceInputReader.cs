@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+///     プレイヤーの入力を読み取り、PieceControllerに伝えるクラス
+/// </summary>
 [RequireComponent(typeof(PlayerInput))]
 public class PieceInputReader : MonoBehaviour
 {
