@@ -14,6 +14,10 @@ public class PieceSpawner : MonoBehaviour
     {
         _stageSettings = stageSettings;
 
+        _initialSpawnPointY = _spawnPoint != null
+            ? _spawnPoint.position.y
+            : 0f;
+
         return ValidateSettings();
     }
 
@@ -30,6 +34,8 @@ public class PieceSpawner : MonoBehaviour
             Debug.LogError("PieceSpawnerが初期化されていません。", this);
             return null;
         }
+
+        UpdateSpawnPointPosition(currentHeight);
 
         HeightSpawnTable spawnTable = GetSpawnTable(currentHeight);
 
@@ -60,6 +66,19 @@ public class PieceSpawner : MonoBehaviour
     [SerializeField] private Transform _spawnPoint;
 
     private StageSettings _stageSettings;
+    private float _initialSpawnPointY;
+
+    private void UpdateSpawnPointPosition(float currentHeight)
+    {
+        if (_spawnPoint == null)
+        {
+            return;
+        }
+
+        Vector3 position = _spawnPoint.position;
+        position.y = currentHeight + _initialSpawnPointY;
+        _spawnPoint.position = position;
+    }
 
     /// <summary>
     ///     現在の高さに応じたSpawnTableを取得する
@@ -193,8 +212,7 @@ public class PieceSpawner : MonoBehaviour
     ///     全体物理設定を取得する
     /// </summary>
     /// <returns>全体物理設定</returns>
-    private GlobalPiecePhysicsSettings
-        GetGlobalPiecePhysicsSettings()
+    private GlobalPiecePhysicsSettings GetGlobalPiecePhysicsSettings()
     {
         if (!_stageSettings.UseGlobalPiecePhysicsSettings)
         {
