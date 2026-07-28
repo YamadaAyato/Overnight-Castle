@@ -19,10 +19,15 @@ MonoBehaviour:
   _stageWidth: 25
   _heightSpawnTables:
   - _heightThreshold: 0
-    _weightedPieces:
-    - _piecePrefab: {fileID: 652989843267835607, guid: 8d6e6c75c85142d4abb9977b4f51a6fc, type: 3}
+    _castlePartType: 0
+    _weightedPieceTypes:
+    - _pieceType: 0
       _spawnWeight: 20
-    - _piecePrefab: {fileID: 4630196758167155554, guid: 0a6a61ea1ad8efb4aaa339723310804f, type: 3}
-      _spawnWeight: 20
-  _useGrobalPiecePhysicsSettings: 0
-  _grobalPiecePhysicsSettings: {fileID: 0}
+    - _pieceType: 1
+      _spawnWeight: 5
+    - _pieceType: 2
+      _spawnWeight: 5
+  _commonPieceSet: {fileID: 11400000, guid: b79d4cc7a5a593748b7cc15965e364be, type: 2}
+  _useGlobalPiecePhysicsSettings: 0
+  _globalPiecePhysicsSettings: {fileID: 0}
+  _heightScoreMultiplier: 10
