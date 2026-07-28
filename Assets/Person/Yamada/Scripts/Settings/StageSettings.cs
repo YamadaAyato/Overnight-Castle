@@ -26,6 +26,9 @@ public class StageSettings : ScriptableObject
     /// <summary> 高さに応じた抽選テーブルのリスト </summary>
     public HeightSpawnTable[] HeightSpawnTables => _heightSpawnTables;
 
+    /// <summary> 全キャラクターの共通ピース一覧 </summary>
+    public PieceSet CommonPieceSet => _commonPieceSet;
+
     /// <summary> 全体物理設定を使用するか </summary>
     public bool UseGlobalPiecePhysicsSettings => _useGlobalPiecePhysicsSettings;
 
@@ -44,6 +47,9 @@ public class StageSettings : ScriptableObject
     [SerializeField, Tooltip("削除するY座標の閾値")] private float _deletePositionY = 10f;
     [SerializeField, Tooltip("ステージの幅")] private float _stageWidth = 10f;
     [SerializeField, Tooltip("ステージの高さ")] private HeightSpawnTable[] _heightSpawnTables;
+
+    [Header("ピース設定")]
+    [SerializeField,Tooltip("全キャラクターの共通ピース一覧")] private PieceSet _commonPieceSet;
 
     [Header("全体物理設定")]
     [SerializeField, Tooltip("全体物理設定を使用するか")] private bool _useGlobalPiecePhysicsSettings = false;

@@ -11,10 +11,7 @@ public class InGameManager : MonoBehaviour
     public bool IsGameFinished => _isGameFinished;
 
     /// <summary> 現在の城の高さ </summary>
-    public float CurrentHeight =>
-        CastleScoreCalculator.CalculateHeight(
-            _spawnedPieces,
-            _stageSettings.GroundPosY);
+    public float CurrentHeight => CalculateCurrentHeight();
 
     /// <summary> ピースの抽選補正設定 </summary>
     public PieceSpawnModifiers Modifiers => _modifiers;
@@ -77,18 +74,20 @@ public class InGameManager : MonoBehaviour
             _stageSettings.HeightScoreMultiplier);
 
         _scoreManager.SetCastleScoreResult(result);
-        OnGameFinished?.Invoke();
 
         Debug.Log($"ゲーム終了: 高さ={result.Height}, " +
             $"高さスコア={result.HeightScore}, " +
             $"完成度スコア={result.CompletionScore}, " +
             $"合計スコア={result.TotalScore}");
+
+        OnGameFinished?.Invoke();
     }
 
     [SerializeField] private PieceController _controller;
     [SerializeField] private PieceSpawner _spawner;
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private StageSettings _stageSettings;
+    [SerializeField] private CharacterDefinition _characterDefinition;
 
     private readonly List<FallingPiece> _spawnedPieces = new List<FallingPiece>();
     private readonly PieceSpawnModifiers _modifiers = new();
@@ -107,7 +106,7 @@ public class InGameManager : MonoBehaviour
         }
 
         // Spawnerの初期化を行う
-        if (!_spawner.Initialize(_stageSettings))
+        if (!_spawner.Initialize(_stageSettings, _characterDefinition))
         {
             enabled = false;
             return;
