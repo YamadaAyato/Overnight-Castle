@@ -8,22 +8,20 @@ public class ScoreManager : MonoBehaviour
     /// <summary>現在のキャッスルスコアの結果</summary>
     public CastleScoreResult CastleScoreResult { get; private set; }
 
-    /// <summary>現在のスコア</summary>
-    public int CurrentScore => CastleScoreResult.TotalScore;
-
     /// <summary>最高スコア</summary>
-    public int MaxScore { get; private set; }
+    public int MaxScore { get; private set; } = 0;
 
-    [SerializeField]
-    private ScoreSender _scoreSender;
+    [SerializeField] private ScoreSender _scoreSender;
+    [SerializeField] private ScoreUI _scoreUI;
 
     public void SetCastleScoreResult(CastleScoreResult castleScoreResult)
     {
         CastleScoreResult = castleScoreResult;
 
-        if (CurrentScore > MaxScore)
+        if (CastleScoreResult.TotalScore > MaxScore)
         {
-            MaxScore = CurrentScore;
+            MaxScore = CastleScoreResult.TotalScore;
+            _scoreUI.SetUI(CastleScoreResult);
         }
     }
 

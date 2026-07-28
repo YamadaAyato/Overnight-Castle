@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// 時間制限を管理するクラス
@@ -12,30 +14,27 @@ public class Timer : MonoBehaviour
     /// 終わった時の通知
     /// </summary>
     public event Action OnTimeUp;
+    public float CurrentTime => _currentTime;
+    public bool IsRunning => _isRunning;
 
+    [SerializeField] Image _timerImage;
+    private float _maxTime;
     private float _currentTime;
     private bool _isRunning;
     
+
     /// <summary>
     /// 何秒間時間を回すのか
     /// </summary>
     /// <param name="time"></param>
     public void StartTimer(float time)
     {
+        _maxTime = time;
         _currentTime = time;
         _isRunning = true;
     }
 
-    /// <summary>
-    /// 残り時間の取得
-    /// </summary>
-    /// <returns></returns>
-    public float GetCurrentTime()
-    {
-        return _currentTime;
-    }
-
-    public void AddTime(int Time) 
+    public void AddTime(int Time)
     {
         _currentTime += Time;
     }
@@ -55,14 +54,20 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         if (!_isRunning) 
+        {
             return;
+        }
             
-
         _currentTime -= Time.deltaTime;
+
 
         if (_currentTime <= 0)
         {
             TimerReset();
+        }
+        else
+        {
+            _timerImage.fillAmount = _currentTime / _maxTime;
         }
     }
 
@@ -74,11 +79,11 @@ public class Timer : MonoBehaviour
         }
     }
 
-    private void TimerReset() 
+    private void TimerReset()
     {
         _isRunning = false;
         _currentTime = 0;
-
+        _timerImage.fillAmount = 0;
         OnTimeUp?.Invoke();
     }
 }
