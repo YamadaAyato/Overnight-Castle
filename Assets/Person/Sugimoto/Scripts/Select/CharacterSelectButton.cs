@@ -1,4 +1,7 @@
+using DG.Tweening;
+using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class CharacterSelectButton : MonoBehaviour
@@ -8,10 +11,39 @@ public class CharacterSelectButton : MonoBehaviour
 
     private SelectCharacterData _selectData;
     private CharacterSelectManager _manager;
+    private Image _image;
+    private int _index;
 
     private void Awake()
     {
         CheckNull();
+        _image = GetComponent<Image>();
+
+        if (_button != null)
+        {
+            _button.transition = Selectable.Transition.None;
+        }
+    }
+
+    //選択したデータを表示
+    public void Select()
+    {
+        _manager.SelectCharacter(_selectData, _index);
+        transform.DOScale(1.2f, 0.2f)
+.       SetLoops(2, LoopType.Yoyo);
+        SetSelected(true);
+    }
+
+    /// <summary>
+    /// 選択時の色を変更する
+    /// 多分後で消す
+    /// </summary>
+    public void SetSelected(bool selected)
+    {
+
+        _image.color = selected
+            ? Color.red
+            : Color.white;
     }
 
     /// <summary>
@@ -21,22 +53,26 @@ public class CharacterSelectButton : MonoBehaviour
     /// <param name="manager"></param>
     public void Initialize(
         SelectCharacterData SelectData,
-        CharacterSelectManager manager)
+        CharacterSelectManager manager,
+        int index)
     {
         _selectData = SelectData;
+        _index = index;
         _manager = manager;
 
         _icon.sprite = SelectData.CharacterImage;
 
         _button.onClick.AddListener(OnClick);
+
+        SetSelected(false);
     }
 
     private void OnClick()
     {
-        _manager.SelectCharacter(_selectData);
+        _manager.SelectButton(_index);
     }
 
-    private void CheckNull() 
+    private void CheckNull()
     {
         if (_button == null)
         {
