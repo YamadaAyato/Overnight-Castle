@@ -396,6 +396,7 @@ MonoBehaviour:
   _characterImage: {fileID: 1914433490}
   _characterName: {fileID: 1884145249}
   _description: {fileID: 1319739798}
+  _selectionController: {fileID: 0}
 --- !u!4 &1105378546
 Transform:
   m_ObjectHideFlags: 0
