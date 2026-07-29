@@ -19,6 +19,8 @@ public class CharacterSelectManager : MonoBehaviour
     [SerializeField] private TMP_Text _characterName;
     [SerializeField] private TMP_Text _description;
 
+    [SerializeField] private SelectionController _selectionController;
+
     /// <summary>
     /// 選択したキャラクターデータ
     /// </summary>
@@ -28,7 +30,7 @@ public class CharacterSelectManager : MonoBehaviour
     /// 選択したユニットをセットする
     /// </summary>
     /// <param name="character"></param>
-    public void SelectCharacter(SelectCharacterData character)
+    public void SelectCharacter(SelectCharacterData character, int index)
     {
         _selectedCharacter = character;
 
@@ -36,6 +38,15 @@ public class CharacterSelectManager : MonoBehaviour
         _characterImage.sprite = character.CharacterImage;
         _characterName.text = character.CharacterName;
         _description.text = character.SkillDescription;
+    }
+
+    /// <summary>
+    /// キモティーモ
+    /// </summary>
+    /// <param name="index"></param>
+    public void SelectButton(int index)
+    {
+        _selectionController.Select(index);
     }
 
     private void Awake()
@@ -55,13 +66,20 @@ public class CharacterSelectManager : MonoBehaviour
     /// </summary>
     private void CreateCharacterButtons()
     {
-        foreach (SelectCharacterData selectData in _selectCharacterDatas)
+        CharacterSelectButton[] buttons =
+            new CharacterSelectButton[_selectCharacterDatas.Length];
+
+        for (int i = 0; i < _selectCharacterDatas.Length; i++)
         {
             CharacterSelectButton button =
                 Instantiate(_chairSelectButton, _buttonParent);
 
-            button.Initialize(selectData, this);
+            button.Initialize(_selectCharacterDatas[i], this, i);
+
+            buttons[i] = button;
         }
+
+        _selectionController.Initialize(buttons);
     }
 
     private void CheckNull()
@@ -94,6 +112,11 @@ public class CharacterSelectManager : MonoBehaviour
         if (_description == null)
         {
             Debug.LogError("_description が null です。");
+        }
+
+        if (_selectionController == null)
+        {
+            Debug.LogError("_selectionController が null です。");
         }
     }
 }
