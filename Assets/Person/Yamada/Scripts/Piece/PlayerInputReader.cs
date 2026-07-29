@@ -5,21 +5,27 @@ using UnityEngine.InputSystem;
 ///     プレイヤーの入力を読み取り、PieceControllerに伝えるクラス
 /// </summary>
 [RequireComponent(typeof(PlayerInput))]
-public class PieceInputReader : MonoBehaviour
+public class PlayerInputReader : MonoBehaviour
 {
     private const string MOVE_ACTION_NAME = "Move";
     private const string ROTATE_ACTION_NAME = "Rotate";
     private const string DROP_ACTION_NAME = "Drop";
+    private const string SKILL1_ACTION_NAME = "Skill1";
+    private const string SKILL2_ACTION_NAME = "Skill2";
 
     [SerializeField] private PieceController _controller;
+    [SerializeField] private CharacterSkillController _skillController;
 
     private InputAction _moveAction;
     private InputAction _rotateAction;
     private InputAction _dropAction;
+    private InputAction _skill1Action;
+    private InputAction _skill2Action;
 
     private void Reset()
     {
         _controller = GetComponent<PieceController>();
+        _skillController = GetComponent<CharacterSkillController>();
     }
 
     private void Awake()
@@ -29,11 +35,18 @@ public class PieceInputReader : MonoBehaviour
             _controller = GetComponent<PieceController>();
         }
 
+        if (_skillController == null)
+        {
+            _skillController = GetComponent<CharacterSkillController>();
+        }
+
         PlayerInput playerInput = GetComponent<PlayerInput>();
 
         _moveAction = playerInput.actions.FindAction(MOVE_ACTION_NAME, true);
         _rotateAction = playerInput.actions.FindAction(ROTATE_ACTION_NAME, true);
         _dropAction = playerInput.actions.FindAction(DROP_ACTION_NAME, true);
+        _skill1Action = playerInput.actions.FindAction(SKILL1_ACTION_NAME, true);
+        _skill2Action = playerInput.actions.FindAction(SKILL2_ACTION_NAME, true);
     }
 
     private void OnEnable()
@@ -45,6 +58,9 @@ public class PieceInputReader : MonoBehaviour
         _rotateAction.canceled += OnRotateCanceled;
 
         _dropAction.performed += OnDropPerformed;
+
+        _skill1Action.performed += OnSkill1Performed;
+        _skill2Action.performed += OnSkill2Performed;
     }
 
     private void OnDisable()
@@ -57,7 +73,10 @@ public class PieceInputReader : MonoBehaviour
 
         _dropAction.performed -= OnDropPerformed;
 
-        if(_controller != null)
+        _skill1Action.performed -= OnSkill1Performed;
+        _skill2Action.performed -= OnSkill2Performed;
+
+        if (_controller != null)
         {
             _controller.SetMoveInput(0f);
             _controller.SetRotateInput(0f);
@@ -107,5 +126,26 @@ public class PieceInputReader : MonoBehaviour
     private void OnDropPerformed(InputAction.CallbackContext context)
     {
         _controller.DropCurrentPiece();
+    }
+
+    /// <summary>
+    ///     スキル1を使用する入力が行われたときに呼ばれるコールバック
+    /// </summary>
+    /// <param name="context">入力コンテキスト</param>
+    private void OnSkill1Performed(InputAction.CallbackContext context)
+    {
+        if (_skillController == null) return;
+
+        _skillController.UseFirstSkill();
+    }
+
+    /// <summary>
+    ///     スキル2を使用する入力が行われたときに呼ばれるコールバック
+    /// </summary>
+    /// <param name="context">入力コンテキスト</param>
+    private void OnSkill2Performed(InputAction.CallbackContext context)
+    {
+        if (_skillController == null) return;
+        _skillController.UseSecondSkill();
     }
 }

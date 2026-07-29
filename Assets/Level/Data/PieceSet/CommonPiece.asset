@@ -17,3 +17,5 @@ MonoBehaviour:
     _spawnWeight: 20
   - _pieceDefinition: {fileID: 11400000, guid: 627653df54832db42af88712c1ac5742, type: 2}
     _spawnWeight: 20
+  - _pieceDefinition: {fileID: 11400000, guid: 7c9615968839ac44cb6567e7af8da00e, type: 2}
+    _spawnWeight: 20
