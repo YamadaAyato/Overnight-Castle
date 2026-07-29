@@ -34,9 +34,10 @@ public class Timer : MonoBehaviour
         _isRunning = true;
     }
 
-    public void AddTime(int Time)
+    public void AddTime(float time)
     {
-        _currentTime += Time;
+        _currentTime += time;
+        Debug.Log($"AddTime: {time}, CurrentTime: {_currentTime}");
     }
 
     private void Awake()

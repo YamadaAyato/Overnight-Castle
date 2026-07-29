@@ -57,6 +57,8 @@ public class InGameManager : MonoBehaviour
         }
 
         _isGameFinished = true;
+        _characterSkillController.StopAllSkills();
+        _modifiers.ResetAllWeightMultipliers();
         _controller.StopControl();
 
         foreach (var piece in _spawnedPieces)
@@ -87,6 +89,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private PieceSpawner _spawner;
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private StageSettings _stageSettings;
+    [SerializeField] private CharacterSkillController _characterSkillController;
     [SerializeField] private CharacterDefinition _characterDefinition;
 
     private readonly List<FallingPiece> _spawnedPieces = new List<FallingPiece>();
@@ -107,6 +110,12 @@ public class InGameManager : MonoBehaviour
 
         // Spawnerの初期化を行う
         if (!_spawner.Initialize(_stageSettings, _characterDefinition))
+        {
+            enabled = false;
+            return;
+        }
+
+        if(!_characterSkillController.Initialize(_characterDefinition, _modifiers, Timer.Instance))
         {
             enabled = false;
             return;
@@ -230,6 +239,11 @@ public class InGameManager : MonoBehaviour
         if(_scoreManager == null)
         {
             Debug.LogError("ScoreManagerが設定されていません。");
+            return false;
+        }
+        if (_characterSkillController == null)
+        {
+            Debug.LogError("CharacterSkillControllerが設定されていません。");
             return false;
         }
         if (_stageSettings == null)

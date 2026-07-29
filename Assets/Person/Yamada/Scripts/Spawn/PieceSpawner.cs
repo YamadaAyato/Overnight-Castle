@@ -267,6 +267,7 @@ public class PieceSpawner : MonoBehaviour
 
             if (randomValue < spawnWeight)
             {
+                spawnModifiers?.ConsumeDraw();
                 return weightedPieceType.PieceType;
             }
 
