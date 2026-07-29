@@ -122,7 +122,7 @@ public class ScoreUI : MonoBehaviour
             value =>
             {
                 currentScore = value;
-                scoreText.text = currentScore.ToString();
+                scoreText.text = ($"{currentScore.ToString()}Scor");
             },
             score,
             _saizUPTime

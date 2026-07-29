@@ -14,11 +14,6 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private ScoreSender _scoreSender;
     [SerializeField] private ScoreUI _scoreUI;
 
-    private void Start()
-    {
-        ScoreResult = new CastleScoreResult(100,200,300,400);
-        SetCastleScoreResult(ScoreResult);
-    }
 
     public void SetCastleScoreResult(CastleScoreResult castleScoreResult)
     {

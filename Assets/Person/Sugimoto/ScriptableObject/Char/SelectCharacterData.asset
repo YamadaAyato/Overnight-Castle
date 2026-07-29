@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958d66eac22e12245ae865626d556083, type: 3}
   m_Name: SelectCharacterData
   m_EditorClassIdentifier: Assembly-CSharp::SelectCharacterData
-  CharacterName: kabotya
-  CharacterImage: {fileID: -7534312728532521880, guid: ae9f8a4ff75454940b23dbb385be6377, type: 3}
-  SkillDescription: "\u304B\u307C\u3061\u3083\u3092\u98DF\u3079\u3066\u5143\u6C17\u306B\u306A\u308D\u3046\uFF01\uFF01\uFF01"
+  _characterDefinition: {fileID: 11400000, guid: c32501812dc25c545b77dea18443cbd4, type: 2}
