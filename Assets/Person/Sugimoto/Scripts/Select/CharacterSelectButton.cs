@@ -11,13 +11,16 @@ public class CharacterSelectButton : MonoBehaviour
 
     private SelectCharacterData _selectData;
     private CharacterSelectManager _manager;
+    private Vector3 _defaultScale;
     private Image _image;
+
     private int _index;
 
     private void Awake()
     {
         CheckNull();
         _image = GetComponent<Image>();
+        _defaultScale = transform.localScale;
 
         if (_button != null)
         {
@@ -29,6 +32,9 @@ public class CharacterSelectButton : MonoBehaviour
     public void Select()
     {
         _manager.SelectCharacter(_selectData, _index);
+
+        transform.DOKill();
+        transform.localScale = _defaultScale;
         transform.DOScale(1.2f, 0.2f)
 .       SetLoops(2, LoopType.Yoyo);
         SetSelected(true);
