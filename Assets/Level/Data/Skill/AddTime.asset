@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31ccd45ebb82ba46a78007f2ba5c618, type: 3}
+  m_Name: AddTime
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSkillDefinition
+  _skillName: "\u6642\u9593\u8FFD\u52A0"
+  _skillDescription: "\u5236\u9650\u6642\u9593\u3092+\u3057\u307E\u3059"
+  _skillEffects:
+  - rid: 597210301096525912
+  references:
+    version: 2
+    RefIds:
+    - rid: 597210301096525912
+      type: {class: AddTimeSkill, ns: , asm: Assembly-CSharp}
+      data:
+        _addTimeAmount: 10
