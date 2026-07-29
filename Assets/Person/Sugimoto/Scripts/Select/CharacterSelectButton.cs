@@ -58,15 +58,15 @@ public class CharacterSelectButton : MonoBehaviour
     /// <param name="SelectData">キャラのデータ</param>
     /// <param name="manager"></param>
     public void Initialize(
-        SelectCharacterData SelectData,
+        SelectCharacterData selectData,
         CharacterSelectManager manager,
         int index)
     {
-        _selectData = SelectData;
+        _selectData = selectData;
         _index = index;
         _manager = manager;
 
-        _icon.sprite = SelectData.CharacterImage;
+        _icon.sprite = _selectData.CharacterSprite;
 
         _button.onClick.AddListener(OnClick);
 
