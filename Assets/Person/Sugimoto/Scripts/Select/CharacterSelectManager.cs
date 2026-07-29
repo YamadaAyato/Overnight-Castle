@@ -1,52 +1,108 @@
+using GameFoundation.Runtime.Attributers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// キャラクター選択の管理クラス
+///     キャラクター選択を管理するクラス
 /// </summary>
 public class CharacterSelectManager : MonoBehaviour
 {
-    [Header("Characters")]
+    /// <summary> 選択したキャラクターデータ </summary>
+    public SelectCharacterData SelectedCharacter { get; private set; }
+
+    [Header("キャラクター設定")]
     [SerializeField] private SelectCharacterData[] _selectCharacterDatas;
 
-    [Header("Button")]
-    [SerializeField] private CharacterSelectButton _chairSelectButton;
+    [Header("ボタン設定")]
+    [SerializeField] private CharacterSelectButton _characterSelectButtonPrefab;
     [SerializeField] private Transform _buttonParent;
 
-    [Header("Preview")]
+    [Header("キャラクタープレビュー設定")]
     [SerializeField] private Image _characterImage;
     [SerializeField] private TMP_Text _characterName;
-    [SerializeField] private TMP_Text _description;
 
+    [Header("スキル1表示設定")]
+    [SerializeField] private TMP_Text _skillName1;
+    [SerializeField] private TMP_Text _skillDescription1;
+
+    [Header("スキル2表示設定")]
+    [SerializeField] private TMP_Text _skillName2;
+    [SerializeField] private TMP_Text _skillDescription2;
+
+    [Header("選択設定")]
     [SerializeField] private SelectionController _selectionController;
 
-    /// <summary>
-    /// 選択したキャラクターデータ
-    /// </summary>
-    public SelectCharacterData _selectedCharacter { get; private set; }
+    [Header("シーン設定")]
+    [SerializeField, SceneNameSelector] private string _inGameSceneName;
 
     /// <summary>
-    /// 選択したユニットをセットする
+    ///     選択したキャラクターデータを設定する
     /// </summary>
-    /// <param name="character"></param>
+    /// <param name="character">選択したキャラクターデータ</param>
+    /// <param name="index">選択したボタンのインデックス</param>
     public void SelectCharacter(SelectCharacterData character, int index)
     {
-        _selectedCharacter = character;
+        if (character == null)
+        {
+            Debug.LogError("選択するキャラクターデータがnullです。", this);
+            return;
+        }
+
+        SelectedCharacter = character;
 
         _characterImage.gameObject.SetActive(true);
-        _characterImage.sprite = character.CharacterImage;
+        _characterImage.sprite = character.CharacterSprite;
         _characterName.text = character.CharacterName;
-        _description.text = character.SkillDescription;
+
+        _skillName1.text = character.SkillName1;
+        _skillDescription1.text = character.SkillDescription1;
+
+        _skillName2.text = character.SkillName2;
+        _skillDescription2.text = character.SkillDescription2;
     }
 
     /// <summary>
-    /// キモティーモ
+    ///     指定したインデックスのキャラクターボタンを選択する
     /// </summary>
-    /// <param name="index"></param>
+    /// <param name="index">選択するボタンのインデックス</param>
     public void SelectButton(int index)
     {
         _selectionController.Select(index);
+    }
+
+    /// <summary>
+    ///     選択したキャラクターでゲームを開始する
+    /// </summary>
+    public void StartGame()
+    {
+        if (SelectedCharacter == null)
+        {
+            Debug.LogError("キャラクターが選択されていません。", this);
+            return;
+        }
+
+        CharacterDefinition characterDefinition = SelectedCharacter.CharacterDefinition;
+
+        if (characterDefinition == null)
+        {
+            Debug.LogError("選択したキャラクターデータにCharacterDefinitionが設定されていません。", this);
+
+            return;
+        }
+
+        if (string.IsNullOrEmpty(_inGameSceneName))
+        {
+            Debug.LogError("InGameSceneNameが設定されていません。", this);
+            return;
+        }
+
+        if (!GameSession.SetSelectedCharacter(characterDefinition))
+        {
+            return;
+        }
+
+        SceneLoader.LoadScene(_inGameSceneName);
     }
 
     private void Awake()
@@ -54,69 +110,143 @@ public class CharacterSelectManager : MonoBehaviour
         CheckNull();
     }
 
-
     private void Start()
     {
         CreateCharacterButtons();
-        _characterImage.gameObject.SetActive(false);
+        HideCharacterPreview();
     }
 
     /// <summary>
-    /// キャラクターのボタンを生成
+    ///     キャラクター選択用のボタンを生成する
     /// </summary>
     private void CreateCharacterButtons()
     {
+        if (_selectCharacterDatas == null ||
+            _selectCharacterDatas.Length == 0)
+        {
+            return;
+        }
+
         CharacterSelectButton[] buttons =
             new CharacterSelectButton[_selectCharacterDatas.Length];
 
-        for (int i = 0; i < _selectCharacterDatas.Length; i++)
+        for (int index = 0; index < _selectCharacterDatas.Length; index++)
         {
-            CharacterSelectButton button =
-                Instantiate(_chairSelectButton, _buttonParent);
+            SelectCharacterData characterData = _selectCharacterDatas[index];
 
-            button.Initialize(_selectCharacterDatas[i], this, i);
+            if (characterData == null)
+            {
+                Debug.LogError($"SelectCharacterDatasの{index}番目が設定されていません。", this);
 
-            buttons[i] = button;
+                continue;
+            }
+
+            CharacterSelectButton button = Instantiate(
+                _characterSelectButtonPrefab,
+                _buttonParent);
+
+            button.Initialize(characterData, this, index);
+            buttons[index] = button;
         }
 
         _selectionController.Initialize(buttons);
     }
 
-    private void CheckNull()
+    /// <summary>
+    ///     キャラクターのプレビューを非表示にする
+    /// </summary>
+    private void HideCharacterPreview()
     {
-        if (_selectCharacterDatas == null)
+        if (_characterImage != null)
         {
-            Debug.LogError("_selectCharacterDatas が null です。");
+            _characterImage.gameObject.SetActive(false);
         }
 
-        if (_chairSelectButton == null)
+        if (_characterName != null)
         {
-            Debug.LogError("_chairSelectButton が null です。");
+            _characterName.text = string.Empty;
+        }
+
+        if (_skillName1 != null)
+        {
+            _skillName1.text = string.Empty;
+        }
+
+        if (_skillDescription1 != null)
+        {
+            _skillDescription1.text = string.Empty;
+        }
+
+        if (_skillName2 != null)
+        {
+            _skillName2.text = string.Empty;
+        }
+
+        if (_skillDescription2 != null)
+        {
+            _skillDescription2.text = string.Empty;
+        }
+    }
+
+    /// <summary>
+    ///     必要な設定が存在するか確認する
+    /// </summary>
+    private void CheckNull()
+    {
+        if (_selectCharacterDatas == null ||
+            _selectCharacterDatas.Length == 0)
+        {
+            Debug.LogError("SelectCharacterDatasが設定されていません。", this);
+        }
+
+        if (_characterSelectButtonPrefab == null)
+        {
+            Debug.LogError("CharacterSelectButtonPrefabが設定されていません。", this);
         }
 
         if (_buttonParent == null)
         {
-            Debug.LogError("_buttonParent が null です。");
+            Debug.LogError("ButtonParentが設定されていません。", this);
         }
 
         if (_characterImage == null)
         {
-            Debug.LogError("_characterImage が null です。");
+            Debug.LogError("CharacterImageが設定されていません。", this);
         }
 
         if (_characterName == null)
         {
-            Debug.LogError("_characterName が null です。");
+            Debug.LogError("CharacterNameが設定されていません。", this);
         }
 
-        if (_description == null)
+        if (_skillName1 == null)
         {
-            Debug.LogError("_description が null です。");
+            Debug.LogError("SkillName1が設定されていません。", this);
+        }
+
+        if (_skillDescription1 == null)
+        {
+            Debug.LogError("SkillDescription1が設定されていません。", this);
+        }
+
+        if (_skillName2 == null)
+        {
+            Debug.LogError("SkillName2が設定されていません。", this);
+        }
+
+        if (_skillDescription2 == null)
+        {
+            Debug.LogError("SkillDescription2が設定されていません。", this);
         }
 
         if (_selectionController == null)
         {
-            Debug.LogError("_selectionController が null です。");
+            Debug.LogError("SelectionControllerが設定されていません。", this);
+        }
+
+        if (string.IsNullOrEmpty(_inGameSceneName))
+        {
+            Debug.LogError("InGameSceneNameが設定されていません。", this);
         }
     }
 }
