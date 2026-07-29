@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 /// <summary>
-/// 制限時間経過後に天球ピボットを回転させ、月が沈み太陽が昇る夜明け演出を行うクラス
+/// 制限時間経過で天球ピボットが時計回りに回転し、月が沈み太陽が昇る夜明け演出を行うクラス
+/// 月と太陽のオブジェクトを、空の親オブジェクトの子として配置する
 /// </summary>
 
 public class DayNightCycle : MonoBehaviour
@@ -12,40 +13,34 @@ public class DayNightCycle : MonoBehaviour
     [Header("制限時間の取得元")]
     [SerializeField] private StageSettings _stageSettings;
 
-    [Header("回転開始のタイミング(ゲーム開始からの経過秒数)")]
-    [SerializeField] private float triggerTime = 60f;
-
-    [Header("回転を完了させる秒数")]
-    [SerializeField] private float RotateDuration = 1f; // 1秒で180度回転する
-
     private Vector3 rotationAngle = new Vector3(0f, 0f, 180f);
 
-    private float _elapsedTime; // ゲーム開始から何秒経過したか
-    private bool _hasTriggered; // 回転がすでに1回発動したかどうか
+    private Tween _rotateTween;
 
-    private void Update()
+    private void Start()
     {
-        //すでに回転していた場合中断する
-        if (_hasTriggered || _stageSettings == null)
+        if (_stageSettings == null)
         {
+            Debug.Log("StageSettingsが設定されていません。", this);
             return;
-        } 
-
-        _elapsedTime += Time.deltaTime;
-
-        if (_elapsedTime >= triggerTime)
-        {
-            _hasTriggered = true;
-            StartRotation();
         }
+
+        Play(_stageSettings.StageTimeLimit);
     }
     /// <summary>
-    /// 特定の時間が経過したとき１秒間で180度回転する
+    /// 指定した時間で180度回転を完了させる
     /// </summary>
-    private void StartRotation()
+    /// <param name="duration">回転にかける秒数(StageTimeLimit)</param>
+    private void Play(float duration)
     {
-        celestiaPivot
-            .DOLocalRotate(rotationAngle, RotateDuration, RotateMode.FastBeyond360)
+        _rotateTween?.Kill();
+
+        //天球ピボットの回転を、初期状態にする
+        celestiaPivot.localRotation = Quaternion.identity;
+
+        // duration秒かけてStageTimeLimitちょうどで180度回転する
+        _rotateTween = celestiaPivot
+            .DOLocalRotate(rotationAngle, duration, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear);
     }
 }
