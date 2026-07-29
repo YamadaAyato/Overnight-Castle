@@ -7,12 +7,12 @@ using UnityEngine;
 [Serializable]
 public class WeightedPiece
 {
-    /// <summary> 抽選対象のピースPrefab </summary>
-    public FallingPiece PiecePrefab => _piecePrefab;
+    /// <summary> 抽選対象のピース定義 </summary>
+    public PieceDefinition PieceDefinition => _pieceDefinition;
 
     /// <summary> 抽選の重み </summary>
     public int SpawnWeight => _spawnWeight;
 
-    [SerializeField] private FallingPiece _piecePrefab;
+    [SerializeField] private PieceDefinition _pieceDefinition;
     [SerializeField, Min(0f)] private int _spawnWeight;
 }
