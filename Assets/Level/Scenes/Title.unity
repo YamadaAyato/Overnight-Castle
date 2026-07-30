@@ -1937,15 +1937,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69815b3f6231b9a4790a970bb3a1b10b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChengUI
-  _upImage:
+  _upObjs:
   - {fileID: 788041145}
   _upImageIndex: 1200
-  _downImage:
+  _downObjs:
   - {fileID: 1162864094}
   _downImageIndex: -200
-  PreviewImage: {fileID: 1923946376}
+  PreviewObj: {fileID: 1923946376}
   ImageIndex: 1500
-  ButtonImage: {fileID: 2134137479}
+  ButtonObj: {fileID: 2134137479}
   ButtonIndex: 1850
   _takesTime: 1
 --- !u!4 &1695131202
