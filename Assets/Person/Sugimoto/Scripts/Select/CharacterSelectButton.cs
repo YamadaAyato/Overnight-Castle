@@ -8,19 +8,29 @@ public class CharacterSelectButton : MonoBehaviour
 {
     [SerializeField] private Button _button;
     [SerializeField] private Image _icon;
+    [SerializeField] private GameObject chackImage;
+    [SerializeField] private Image backImage;
+    [SerializeField] private Sprite changeImage;
 
+
+    private Sprite _defaultBackSprite;
     private SelectCharacterData _selectData;
     private CharacterSelectManager _manager;
     private Vector3 _defaultScale;
-    private Image _image;
+
+    [Header("アニメーション設定")] 
+    [SerializeField]private float scale = 1.2f;
+    [SerializeField] private float smoleScale = 0.8f;
+    [SerializeField] private float time = 0.2f;
+
 
     private int _index;
 
     private void Awake()
     {
         CheckNull();
-        _image = GetComponent<Image>();
         _defaultScale = transform.localScale;
+        _defaultBackSprite = backImage.sprite;
 
         if (_button != null)
         {
@@ -35,8 +45,11 @@ public class CharacterSelectButton : MonoBehaviour
 
         transform.DOKill();
         transform.localScale = _defaultScale;
-        transform.DOScale(1.2f, 0.2f)
-.       SetLoops(2, LoopType.Yoyo);
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(transform.DOScale(scale, time));
+        sequence.Append(transform.DOScale(smoleScale, time));
+        sequence.Append(transform.DOScale(_defaultScale, time));
         SetSelected(true);
     }
 
@@ -46,10 +59,15 @@ public class CharacterSelectButton : MonoBehaviour
     /// </summary>
     public void SetSelected(bool selected)
     {
-
-        _image.color = selected
-            ? Color.red
-            : Color.white;
+        chackImage.gameObject.SetActive(selected);
+        if (selected)
+        {
+            backImage.sprite = changeImage;
+        }
+        else 
+        {
+            backImage.sprite = _defaultBackSprite;
+        }
     }
 
     /// <summary>

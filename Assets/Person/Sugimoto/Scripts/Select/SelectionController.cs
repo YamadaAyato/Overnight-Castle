@@ -6,6 +6,11 @@ public class SelectionController : MonoBehaviour
     private CharacterSelectButton[] _buttons;
     private int _selectedIndex;
 
+    private void Awake()
+    {
+        _selectedIndex = -1;
+    }
+
     public void Initialize(CharacterSelectButton[] buttons)
     {
         _buttons = buttons;
@@ -16,7 +21,7 @@ public class SelectionController : MonoBehaviour
             return;
         }
 
-        Select(0);
+        //Select(0);
     }
 
     /// <summary>
@@ -30,7 +35,12 @@ public class SelectionController : MonoBehaviour
             return;
         }
 
-        _buttons[_selectedIndex].SetSelected(false);
+        // Ç∑Ç≈Ç…ëIëÇ≥ÇÍÇƒÇ¢ÇÈÉ{É^ÉìÇ™Ç†ÇÈèÍçáÇæÇØâèú
+        if (_selectedIndex != -1)
+        {
+            _buttons[_selectedIndex].SetSelected(false);
+        }
+
         _selectedIndex = index;
         _buttons[_selectedIndex].Select();
     }
@@ -44,6 +54,7 @@ public class SelectionController : MonoBehaviour
 
         if (Keyboard.current.upArrowKey.wasPressedThisFrame)
         {
+
             Move(-1);
         }
         else if (Keyboard.current.downArrowKey.wasPressedThisFrame)
@@ -58,6 +69,11 @@ public class SelectionController : MonoBehaviour
     /// <param name="direction"></param>
     private void Move(int direction)
     {
+        if (_selectedIndex == -1)
+        {
+            Select(0);
+            return;
+        }
         Select(_selectedIndex + direction);
     }
 }

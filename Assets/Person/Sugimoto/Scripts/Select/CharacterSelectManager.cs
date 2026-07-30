@@ -36,6 +36,8 @@ public class CharacterSelectManager : MonoBehaviour
     [Header("シーン設定")]
     [SerializeField, SceneNameSelector] private string _inGameSceneName;
 
+    private bool _isStarted;
+
     /// <summary>
     ///     選択したキャラクターデータを設定する
     /// </summary>
@@ -110,8 +112,15 @@ public class CharacterSelectManager : MonoBehaviour
         CheckNull();
     }
 
-    private void Start()
+    public void PlayStart()
     {
+        if (_isStarted)
+        {
+            return;
+        }
+
+        _isStarted = true;
+
         CreateCharacterButtons();
         HideCharacterPreview();
     }
