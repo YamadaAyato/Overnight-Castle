@@ -11,11 +11,11 @@ public class ChengUI : MonoBehaviour
     [SerializeField] private int _downImageIndex = 5;
 
     [Header("横からスライドさせるイメージ")]
-    [SerializeField] private GameObject PreviewObj;
-    [SerializeField] private int ImageIndex = 1500;
+    [SerializeField] private GameObject _previewObj;
+    [SerializeField] private int _imageIndex = 1500;
 
-    [SerializeField] private GameObject ButtonObj;
-    [SerializeField] private int ButtonIndex = -450;
+    [SerializeField] private GameObject _buttonObj;
+    [SerializeField] private int _buttonIndex = -450;
 
     [SerializeField] private int _takesTime = 1;
 
@@ -31,7 +31,7 @@ public class ChengUI : MonoBehaviour
             imageObject.transform.DOMoveY(_downImageIndex, _takesTime);
         }
 
-        PreviewObj.transform.DOMoveX(ImageIndex, _takesTime);
-        ButtonObj.transform.DOMoveX(ButtonIndex, _takesTime);
+        _previewObj.transform.DOMoveX(_imageIndex, _takesTime);
+        _buttonObj.transform.DOMoveX(_buttonIndex, _takesTime);
     }
 }

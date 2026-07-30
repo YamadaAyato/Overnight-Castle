@@ -8,9 +8,9 @@ public class CharacterSelectButton : MonoBehaviour
 {
     [SerializeField] private Button _button;
     [SerializeField] private Image _icon;
-    [SerializeField] private GameObject chackImage;
-    [SerializeField] private Image backImage;
-    [SerializeField] private Sprite changeImage;
+    [SerializeField] private GameObject _chackImage;
+    [SerializeField] private Image _backImage;
+    [SerializeField] private Sprite _changeImage;
 
 
     private Sprite _defaultBackSprite;
@@ -19,9 +19,9 @@ public class CharacterSelectButton : MonoBehaviour
     private Vector3 _defaultScale;
 
     [Header("アニメーション設定")] 
-    [SerializeField]private float scale = 1.2f;
-    [SerializeField] private float smoleScale = 0.8f;
-    [SerializeField] private float time = 0.2f;
+    [SerializeField]private float _scale = 1.2f;
+    [SerializeField] private float _smoleScale = 0.8f;
+    [SerializeField] private float _time = 0.2f;
 
 
     private int _index;
@@ -30,7 +30,7 @@ public class CharacterSelectButton : MonoBehaviour
     {
         CheckNull();
         _defaultScale = transform.localScale;
-        _defaultBackSprite = backImage.sprite;
+        _defaultBackSprite = _backImage.sprite;
 
         if (_button != null)
         {
@@ -47,9 +47,9 @@ public class CharacterSelectButton : MonoBehaviour
         transform.localScale = _defaultScale;
         Sequence sequence = DOTween.Sequence();
 
-        sequence.Append(transform.DOScale(scale, time));
-        sequence.Append(transform.DOScale(smoleScale, time));
-        sequence.Append(transform.DOScale(_defaultScale, time));
+        sequence.Append(transform.DOScale(_scale, _time));
+        sequence.Append(transform.DOScale(_smoleScale, _time));
+        sequence.Append(transform.DOScale(_defaultScale, _time));
         SetSelected(true);
     }
 
@@ -59,14 +59,14 @@ public class CharacterSelectButton : MonoBehaviour
     /// </summary>
     public void SetSelected(bool selected)
     {
-        chackImage.gameObject.SetActive(selected);
+        _chackImage.gameObject.SetActive(selected);
         if (selected)
         {
-            backImage.sprite = changeImage;
+            _backImage.sprite = _changeImage;
         }
         else 
         {
-            backImage.sprite = _defaultBackSprite;
+            _backImage.sprite = _defaultBackSprite;
         }
     }
 
