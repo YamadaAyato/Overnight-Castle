@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class ChengUI : MonoBehaviour
 {
     [Header("変えたときに移動するUI")]
-    [SerializeField] private GameObject[] _upImage;
+    [SerializeField] private GameObject[] _upObjs;
     [SerializeField] private int _upImageIndex = 5;
-    [SerializeField] private GameObject[] _downImage;
+    [SerializeField] private GameObject[] _downObjs;
     [SerializeField] private int _downImageIndex = 5;
 
     [Header("横からスライドさせるイメージ")]
@@ -21,12 +21,12 @@ public class ChengUI : MonoBehaviour
 
     public void UICheng()
     {
-        foreach (var imageObject in _upImage)
+        foreach (var imageObject in _upObjs)
         {
             imageObject.transform.DOMoveY(_upImageIndex, _takesTime);
         }
 
-        foreach (var imageObject in _downImage)
+        foreach (var imageObject in _downObjs)
         {
             imageObject.transform.DOMoveY(_downImageIndex, _takesTime);
         }
