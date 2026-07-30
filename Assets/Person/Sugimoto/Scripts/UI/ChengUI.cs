@@ -19,7 +19,7 @@ public class ChengUI : MonoBehaviour
 
     [SerializeField] private int _takesTime = 1;
 
-    public void UICheng()
+    public void UIChange()
     {
         foreach (var imageObject in _upObjs)
         {
