@@ -39,7 +39,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1288.3103, y: 302.4259}
   m_SizeDelta: {x: 150, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &125037646174007853
@@ -138,12 +138,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectButton
   _button: {fileID: 3973925055780469467}
   _icon: {fileID: 2142933453206929652}
-  chackImage: {fileID: 5169351563535816948}
-  backImage: {fileID: 5492556895739898012}
-  changeImage: {fileID: 21300000, guid: fb6ad70c7fea4f54c9f2b2f45c88f9ae, type: 3}
-  scale: 6
-  smoleScale: 4
-  time: 0.2
+  _chackImage: {fileID: 5169351563535816948}
+  _backImage: {fileID: 5492556895739898012}
+  _changeImage: {fileID: 21300000, guid: fb6ad70c7fea4f54c9f2b2f45c88f9ae, type: 3}
+  _scale: 6
+  _smoleScale: 4
+  _time: 0.2
 --- !u!114 &7367407166420814460
 MonoBehaviour:
   m_ObjectHideFlags: 0

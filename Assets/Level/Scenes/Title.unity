@@ -1194,7 +1194,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1695131201}
         m_TargetAssemblyTypeName: ChengUI, Assembly-CSharp
-        m_MethodName: UICheng
+        m_MethodName: UIChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1943,10 +1943,10 @@ MonoBehaviour:
   _downObjs:
   - {fileID: 1162864094}
   _downImageIndex: -200
-  PreviewObj: {fileID: 1923946376}
-  ImageIndex: 1500
-  ButtonObj: {fileID: 2134137479}
-  ButtonIndex: 1850
+  _previewObj: {fileID: 1923946376}
+  _imageIndex: 1500
+  _buttonObj: {fileID: 2134137479}
+  _buttonIndex: 1800
   _takesTime: 1
 --- !u!4 &1695131202
 Transform:
