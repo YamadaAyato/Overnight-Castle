@@ -33,7 +33,6 @@ public class NextPieceView : MonoBehaviour
 
         _pieceSpawner.OnNextPieceDefinitionChanged += ShowNextPiece;
         SetSprite(_pieceSpawner.NextPieceDefinition);
-        //ShowNextPiece(_pieceSpawner.NextPieceDefinition);
     }
 
     private void OnDisable()
@@ -43,13 +42,16 @@ public class NextPieceView : MonoBehaviour
             _pieceSpawner.OnNextPieceDefinitionChanged -= ShowNextPiece;
         }
 
-        DOTween.Kill(_image.rectTransform);
-        //_image.rectTransform.anchoredPosition = _basePos;
+        if (_image != null)
+        {
+            DOTween.Kill(_image.rectTransform);
+            _image.rectTransform.anchoredPosition = _basePos;
+        }
     }
 
     /// <summary>
     ///     次に出現するピースの画像を表示する
-    ///     _duration秒かけて移動上に移動する演出
+    ///     _duration秒かけて上に移動する演出
     /// </summary>
     /// <param name="pieceDefinition"></param>
     private void ShowNextPiece(PieceDefinition pieceDefinition)
@@ -68,22 +70,6 @@ public class NextPieceView : MonoBehaviour
         });
         //下からもとのy座標まで移動
         sequence.Append(rt.DOAnchorPosY(_basePos.y, _duration));
-        /*
-        if (_image == null)
-        {
-            return;
-        }
-
-        if (pieceDefinition == null ||
-            pieceDefinition.Sprite == null)
-        {
-            _image.sprite = null;
-            _image.enabled = false;
-            return;
-        }
-
-        _image.sprite = pieceDefinition.Sprite;
-        _image.enabled = true; */
     }
     /// <summary>
     /// ピースの画像を表示する
@@ -100,8 +86,5 @@ public class NextPieceView : MonoBehaviour
 
         _image.sprite = pieceDefinition.Sprite;
         _image.enabled = true;
-        /*bool hasSprite = pieceDefinition != null && pieceDefinition.Sprite != null;
-        _image.sprite = hasSprite ? pieceDefinition.Sprite : null;
-        _image.enabled = hasSprite;*/
     }
 }
