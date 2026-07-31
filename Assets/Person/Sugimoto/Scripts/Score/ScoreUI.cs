@@ -11,8 +11,11 @@ public class ScoreUI : MonoBehaviour
 {
     [SerializeField] private Image _backImage;
     [SerializeField] private Image[] _scoreImages;
+
     [SerializeField]private TextMeshProUGUI _height;
     [SerializeField]private TextMeshProUGUI _heightScore;
+    [SerializeField] private TextMeshProUGUI _maxScoreText;
+
     [SerializeField]private TextMeshProUGUI _completionScore;
     [SerializeField]private TextMeshProUGUI _totalScore;
 
@@ -20,6 +23,7 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private float _Interval = 0.3f;
 
     private Sequence _sequence;
+    private bool _isMaxScore;
 
     private void Awake()
     {
@@ -28,15 +32,17 @@ public class ScoreUI : MonoBehaviour
             image.gameObject.SetActive(false);
         }
 
-        _backImage.gameObject.SetActive(false);
-        _height.gameObject.SetActive(false);
-        _heightScore.gameObject.SetActive(false);
-        _completionScore.gameObject.SetActive(false);
-        _totalScore.gameObject.SetActive(false);
+        _backImage?.gameObject.SetActive(false);
+        _height?.gameObject.SetActive(false);
+        _heightScore?.gameObject.SetActive(false);
+        _maxScoreText?.gameObject.SetActive(false);
+        _completionScore?.gameObject.SetActive(false);
+        _totalScore?.gameObject.SetActive(false);
     }
 
-    public void SetUI(CastleScoreResult result)
+    public void SetUI(CastleScoreResult result,bool isMaxScore)
     {
+        _isMaxScore = isMaxScore;
         PlayScoreAnimation(result);
     }
 
@@ -70,11 +76,15 @@ public class ScoreUI : MonoBehaviour
             AppendAnimation(_scoreImages[i].gameObject, addInterval);
         }
 
-        // スコアを順番に表示・カウントアップ
-        _sequence.Join(ShowScore((int)result.Height, _height));
+        //順番に表示・カウントアップ
+        _sequence.Join(ShowScore(result.Height, _height));
         _sequence.Join(ShowScore(result.HeightScore, _heightScore));
         _sequence.Join(ShowScore(result.CompletionScore, _completionScore));
-        _sequence.Join(ShowScore( result.TotalScore,_totalScore));
+        _sequence.Join(ShowScore(result.TotalScore, _totalScore));
+        if (_isMaxScore && _maxScoreText != null)
+        {
+            AppendAnimation(_maxScoreText.gameObject, false);
+        }
     }
 
     /// <summary>
@@ -109,13 +119,13 @@ public class ScoreUI : MonoBehaviour
     /// <param name="score"></param>
     /// <param name="scoreText"></param>
     /// <returns></returns>
-    private Tween ShowScore(int score, TextMeshProUGUI scoreText)
+    private Tween ShowScore(float score, TextMeshProUGUI scoreText)
     {
         _sequence.AppendCallback(() =>
         {
             scoreText.gameObject.SetActive(true);
         } );
-        int currentScore = 0;
+        float currentScore = 0;
 
         return DOTween.To(
             () => currentScore,
