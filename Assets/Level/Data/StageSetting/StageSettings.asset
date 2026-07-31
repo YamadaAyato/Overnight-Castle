@@ -26,7 +26,7 @@ MonoBehaviour:
     - _pieceType: 1
       _spawnWeight: 5
     - _pieceType: 2
-      _spawnWeight: 5
+      _spawnWeight: 3
   - _heightThreshold: 5
     _castlePartType: 1
     _weightedPieceTypes:
@@ -35,8 +35,8 @@ MonoBehaviour:
     - _pieceType: 1
       _spawnWeight: 5
     - _pieceType: 2
-      _spawnWeight: 5
-  - _heightThreshold: 16
+      _spawnWeight: 3
+  - _heightThreshold: 9
     _castlePartType: 2
     _weightedPieceTypes:
     - _pieceType: 0

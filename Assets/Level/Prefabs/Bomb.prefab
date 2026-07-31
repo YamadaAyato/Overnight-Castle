@@ -199,9 +199,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c04adfb1695bd44185b560d90942920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BombPiece
-  _fadeDuration: 1.5
+  _fadeDuration: 0.3
   _explosionRadius: 6
-  _explosionForce: 20
+  _explosionForce: 75
   _explosionLayer:
     serializedVersion: 2
     m_Bits: 4294967295

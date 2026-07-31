@@ -17,7 +17,7 @@ MonoBehaviour:
   _partType: 1
   _score: 100
   _physicsSettings:
-    _mass: 1.5
+    _mass: 2.5
     _gravityScale: 1
     _linearDamping: 0
     _angularDamping: 1.5

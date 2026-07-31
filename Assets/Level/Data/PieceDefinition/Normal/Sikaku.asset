@@ -15,9 +15,9 @@ MonoBehaviour:
   _sprite: {fileID: 21300000, guid: 82671acb1ec0ba2439d317acbb619ff8, type: 3}
   _pieceType: 0
   _partType: 0
-  _score: 100
+  _score: 20
   _physicsSettings:
-    _mass: 1.5
+    _mass: 60
     _gravityScale: 1
     _linearDamping: 0
     _angularDamping: 1.5
