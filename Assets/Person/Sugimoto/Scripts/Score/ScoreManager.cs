@@ -15,9 +15,11 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private ScoreSender _scoreSender;
     [SerializeField] private ScoreUI _scoreUI;
     [SerializeField] private CameraAnimation _cameraAnimation;
+    [SerializeField] private TargetCamera _targetCamera;
 
     public void SetCastleScoreResult(CastleScoreResult castleScoreResult)
     {
+        _targetCamera.SetTrackingEnabled(false);
         ScoreResult = castleScoreResult;
         bool isMax = false;
 

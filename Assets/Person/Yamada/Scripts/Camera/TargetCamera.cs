@@ -15,6 +15,17 @@ public class TargetCamera : MonoBehaviour
     private float _initialTargetY;
     private float _initialOrthographicSize;
     private float _zoomVelocity;
+    private bool _isTrackingEnabled;
+
+    public void SetTrackingEnabled(bool isEnabled)
+    {
+        _isTrackingEnabled = isEnabled;
+
+        if (!isEnabled)
+        {
+            _zoomVelocity = 0f;
+        }
+    }
 
     private void Start()
     {
@@ -39,6 +50,9 @@ public class TargetCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!_isTrackingEnabled)
+            return;
+
         Vector3 targetPosition = transform.position;
         targetPosition.y = _targetTransform.position.y + _spawnOffsetY;
         transform.position = targetPosition;
