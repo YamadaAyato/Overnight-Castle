@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     /// <summary>現在のキャッスルスコアの結果</summary>
-    public CastleScoreResult CastleScoreResult { get; private set; }
+    public CastleScoreResult ScoreResult { get; private set; }
 
     /// <summary>最高スコア</summary>
     public int MaxScore { get; private set; } = 0;
@@ -14,15 +14,16 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private ScoreSender _scoreSender;
     [SerializeField] private ScoreUI _scoreUI;
 
+
     public void SetCastleScoreResult(CastleScoreResult castleScoreResult)
     {
-        CastleScoreResult = castleScoreResult;
+        ScoreResult = castleScoreResult;
 
-        if (CastleScoreResult.TotalScore > MaxScore)
+        if (ScoreResult.TotalScore > MaxScore)
         {
-            MaxScore = CastleScoreResult.TotalScore;
-            _scoreUI.SetUI(CastleScoreResult);
+            MaxScore = ScoreResult.TotalScore;
         }
+        _scoreUI.SetUI(ScoreResult);
     }
 
     /// <summary>
@@ -30,7 +31,7 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     public void ResetScore()
     {
-        CastleScoreResult = default;
+        ScoreResult = default;
     }
 
     /// <summary>

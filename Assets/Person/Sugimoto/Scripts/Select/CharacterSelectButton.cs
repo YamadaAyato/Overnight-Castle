@@ -8,19 +8,29 @@ public class CharacterSelectButton : MonoBehaviour
 {
     [SerializeField] private Button _button;
     [SerializeField] private Image _icon;
+    [SerializeField] private GameObject _chackImage;
+    [SerializeField] private Image _backImage;
+    [SerializeField] private Sprite _changeImage;
 
+
+    private Sprite _defaultBackSprite;
     private SelectCharacterData _selectData;
     private CharacterSelectManager _manager;
     private Vector3 _defaultScale;
-    private Image _image;
+
+    [Header("アニメーション設定")] 
+    [SerializeField]private float _scale = 1.2f;
+    [SerializeField] private float _smoleScale = 0.8f;
+    [SerializeField] private float _time = 0.2f;
+
 
     private int _index;
 
     private void Awake()
     {
         CheckNull();
-        _image = GetComponent<Image>();
         _defaultScale = transform.localScale;
+        _defaultBackSprite = _backImage.sprite;
 
         if (_button != null)
         {
@@ -35,8 +45,11 @@ public class CharacterSelectButton : MonoBehaviour
 
         transform.DOKill();
         transform.localScale = _defaultScale;
-        transform.DOScale(1.2f, 0.2f)
-.       SetLoops(2, LoopType.Yoyo);
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(transform.DOScale(_scale, _time));
+        sequence.Append(transform.DOScale(_smoleScale, _time));
+        sequence.Append(transform.DOScale(_defaultScale, _time));
         SetSelected(true);
     }
 
@@ -46,10 +59,15 @@ public class CharacterSelectButton : MonoBehaviour
     /// </summary>
     public void SetSelected(bool selected)
     {
-
-        _image.color = selected
-            ? Color.red
-            : Color.white;
+        _chackImage.gameObject.SetActive(selected);
+        if (selected)
+        {
+            _backImage.sprite = _changeImage;
+        }
+        else 
+        {
+            _backImage.sprite = _defaultBackSprite;
+        }
     }
 
     /// <summary>
@@ -58,15 +76,15 @@ public class CharacterSelectButton : MonoBehaviour
     /// <param name="SelectData">キャラのデータ</param>
     /// <param name="manager"></param>
     public void Initialize(
-        SelectCharacterData SelectData,
+        SelectCharacterData selectData,
         CharacterSelectManager manager,
         int index)
     {
-        _selectData = SelectData;
+        _selectData = selectData;
         _index = index;
         _manager = manager;
 
-        _icon.sprite = SelectData.CharacterImage;
+        _icon.sprite = _selectData.CharacterSprite;
 
         _button.onClick.AddListener(OnClick);
 
