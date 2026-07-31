@@ -15,10 +15,10 @@ MonoBehaviour:
   _sprite: {fileID: 21300000, guid: 6a91d28c15068884195139806f361f30, type: 3}
   _pieceType: 0
   _partType: 0
-  _score: 50
+  _score: 70
   _physicsSettings:
     _mass: 50
-    _gravityScale: 1
-    _linearDamping: 0
+    _gravityScale: 2
+    _linearDamping: 3
     _angularDamping: 1.5
   _prefab: {fileID: 0}

@@ -18,7 +18,7 @@ MonoBehaviour:
   _score: 50
   _physicsSettings:
     _mass: 50
-    _gravityScale: 1
-    _linearDamping: 0
+    _gravityScale: 2
+    _linearDamping: 3
     _angularDamping: 1.5
   _prefab: {fileID: 0}
