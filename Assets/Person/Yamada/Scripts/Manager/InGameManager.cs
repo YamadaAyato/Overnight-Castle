@@ -92,6 +92,8 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private StageSettings _stageSettings;
     [SerializeField] private CharacterSkillController _characterSkillController;
     [SerializeField] private CharacterDefinition _characterDefinition;
+    [SerializeField] private DayCycleBackgroundView _dayCycleBackgroundView;
+    [SerializeField] private DayNightCycle _dayNightCycle;
     [SerializeField, Min(0f)] private float _stopLinearVelocityThreshold = 0.05f;
     [SerializeField, Min(0f)] private float _stopAngularVelocityThreshold = 2f;
     [SerializeField, Min(0f)] private float _requiredStopDuration = 0.5f;
@@ -135,6 +137,9 @@ public class InGameManager : MonoBehaviour
         _modifiers.ResetAllWeightMultipliers();
 
         Timer.Instance.StartTimer(_stageSettings.StageTimeLimit);
+        _dayCycleBackgroundView.StartScroll(Timer.Instance);
+        _dayNightCycle.Initialize(Timer.Instance);
+
         SpawnPiece();
     }
 

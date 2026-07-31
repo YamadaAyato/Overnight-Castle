@@ -14,6 +14,8 @@ public class Timer : MonoBehaviour
     /// 終わった時の通知
     /// </summary>
     public event Action OnTimeUp;
+
+    public event Action<float> OnTimeAdded;
     public float CurrentTime => _currentTime;
     public bool IsRunning => _isRunning;
 
@@ -48,6 +50,7 @@ public class Timer : MonoBehaviour
         _currentTime += time;
 
         UpdateTimerImage();
+        OnTimeAdded?.Invoke(time);
         Debug.Log($"AddTime: {time}, CurrentTime: {_currentTime}");
     }
 

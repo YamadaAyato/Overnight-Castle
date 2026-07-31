@@ -8,25 +8,39 @@ using DG.Tweening;
 public class DayNightCycle : MonoBehaviour
 {
     [Header("天球ピボット")]
-    [SerializeField] private Transform celestiaPivot;
-
-    [Header("制限時間の取得元")]
-    [SerializeField] private StageSettings _stageSettings;
+    [SerializeField] private Transform _celestiaPivot;
 
     private Vector3 rotationAngle = new Vector3(0f, 0f, 180f);
 
+    private Timer _timer;
     private Tween _rotateTween;
 
-    private void Start()
+    public bool Initialize(Timer timer)
     {
-        if (_stageSettings == null)
+        if(_celestiaPivot == null)
         {
-            Debug.Log("StageSettingsが設定されていません。", this);
-            return;
+            Debug.LogError("天球ピボットが設定されていません", this);
+            return false;
         }
 
-        Play(_stageSettings.StageTimeLimit);
+        if (timer == null)
+        {
+            Debug.LogError("Timerが設定されていません", this);
+            return false;
+        }
+
+        _timer = timer;
+        _timer.OnTimeAdded += HandleTimeAdded;
+        Play(_timer.CurrentTime);
+        return true;
     }
+
+    private void HandleTimeAdded(float addedTime)
+    {
+        // タイマーの時間に応じて回転を再開
+        Play(_timer.CurrentTime);
+    }
+
     /// <summary>
     /// 指定した時間で180度回転を完了させる
     /// </summary>
@@ -36,11 +50,12 @@ public class DayNightCycle : MonoBehaviour
         _rotateTween?.Kill();
 
         //天球ピボットの回転を、初期状態にする
-        celestiaPivot.localRotation = Quaternion.identity;
+        _celestiaPivot.localRotation = Quaternion.identity;
 
         // duration秒かけてStageTimeLimitちょうどで180度回転する
-        _rotateTween = celestiaPivot
+        _rotateTween = _celestiaPivot
             .DOLocalRotate(rotationAngle, duration, RotateMode.FastBeyond360)
-            .SetEase(Ease.Linear);
+            .SetEase(Ease.Linear)
+            .SetLink(gameObject);
     }
 }
