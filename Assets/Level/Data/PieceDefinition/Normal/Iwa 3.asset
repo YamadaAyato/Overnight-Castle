@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7afff082e9331147a9a34d2edcd20c5, type: 3}
-  m_Name: Ex1
+  m_Name: Iwa 3
   m_EditorClassIdentifier: Assembly-CSharp::PieceDefinition
-  _sprite: {fileID: 2747690628134850419, guid: 16037dbd798344f57a526d53d48f5ead, type: 3}
+  _sprite: {fileID: 21300000, guid: 6a91d28c15068884195139806f361f30, type: 3}
   _pieceType: 0
   _partType: 0
-  _score: 10
+  _score: 50
   _physicsSettings:
     _mass: 1
     _gravityScale: 1

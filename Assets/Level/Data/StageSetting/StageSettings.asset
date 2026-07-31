@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: StageSettings
   m_EditorClassIdentifier: Assembly-CSharp::StageSettings
   _stageTimeLimit: 60
-  _nextSpawnDelay: 0.8
-  _groundPosY: -9
-  _deletePositionY: -10
-  _stageWidth: 25
+  _nextSpawnDelay: 1.5
+  _groundPosY: -4
+  _deletePositionY: -5
+  _stageWidth: 10
   _heightSpawnTables:
   - _heightThreshold: 0
     _castlePartType: 0
@@ -27,6 +27,24 @@ MonoBehaviour:
       _spawnWeight: 5
     - _pieceType: 2
       _spawnWeight: 5
+  - _heightThreshold: 5
+    _castlePartType: 1
+    _weightedPieceTypes:
+    - _pieceType: 0
+      _spawnWeight: 20
+    - _pieceType: 1
+      _spawnWeight: 5
+    - _pieceType: 2
+      _spawnWeight: 5
+  - _heightThreshold: 16
+    _castlePartType: 2
+    _weightedPieceTypes:
+    - _pieceType: 0
+      _spawnWeight: 20
+    - _pieceType: 1
+      _spawnWeight: 5
+    - _pieceType: 2
+      _spawnWeight: 20
   _commonPieceSet: {fileID: 11400000, guid: b79d4cc7a5a593748b7cc15965e364be, type: 2}
   _useGlobalPiecePhysicsSettings: 0
   _globalPiecePhysicsSettings: {fileID: 0}

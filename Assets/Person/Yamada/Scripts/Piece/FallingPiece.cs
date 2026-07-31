@@ -107,6 +107,29 @@ public class FallingPiece : MonoBehaviour
         _rigidbody2D.bodyType = RigidbodyType2D.Static;
     }
 
+    /// <summary>
+    ///     ピースが停止しているかどうかを判定する
+    /// </summary>
+    /// <param name="linearVelocityThreshold">線形速度の閾値</param>
+    /// <param name="angularVelocityThreshold">角速度の閾値</param>
+    /// <returns>ピースが停止している場合はtrue、それ以外の場合はfalse</returns>
+    public bool IsStopped(float linearVelocityThreshold, float angularVelocityThreshold)
+    {
+        if(!_hasDropped ||
+            _rigidbody2D.bodyType != RigidbodyType2D.Dynamic)
+        {
+            return false;
+        }
+
+        // 閾値を正の値に変換する
+        float linerThreshold = Mathf.Max(0f, linearVelocityThreshold);
+        float angularThreshold = Mathf.Max(0f, angularVelocityThreshold);
+
+        // 速度が閾値以下かどうかを判定する
+        return _rigidbody2D.linearVelocity.sqrMagnitude <= linerThreshold * linerThreshold &&
+               Mathf.Abs(_rigidbody2D.angularVelocity) <= angularThreshold;
+    }
+
     private readonly List<Vector2> _originalColliderPoints = new List<Vector2>();
 
     private PieceDefinition _pieceDefinition;

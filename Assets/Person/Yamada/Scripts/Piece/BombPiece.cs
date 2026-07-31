@@ -8,6 +8,9 @@ using UnityEngine;
 [RequireComponent(typeof(FallingPiece))]
 public class BombPiece : MonoBehaviour
 {
+    /// <summary> 爆発までの待機状態かどうか </summary>
+    public bool IsWaitingToExplode => _hasStartedFuse && !_hasExploded;
+
     [Header("爆弾の設定")]
     [SerializeField, Range(0f, 5f), Tooltip("接触してから爆発するまでの時間")]
     private float _fadeDuration = 1.5f;
