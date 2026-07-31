@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14e0f44a88f5f2a46915c35e6b2ff471, type: 3}
   m_Name: StageSettings
   m_EditorClassIdentifier: Assembly-CSharp::StageSettings
-  _stageTimeLimit: 10
+  _stageTimeLimit: 120
   _nextSpawnDelay: 1.5
   _groundPosY: -4
   _deletePositionY: -5
-  _stageWidth: 10
+  _stageWidth: 17
   _heightSpawnTables:
   - _heightThreshold: 0
     _castlePartType: 0
