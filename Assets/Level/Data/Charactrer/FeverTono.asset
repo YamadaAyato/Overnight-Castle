@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cafd9a9011d2694293506d028be6229, type: 3}
-  m_Name: ex.chara
+  m_Name: FeverTono
   m_EditorClassIdentifier: Assembly-CSharp::CharacterDefinition
   _characterName: "\u30D5\u30A3\u30D0\u6BBF"
   _characterSprite: {fileID: 8123076225514648798, guid: 3e7e147ead2c4414f826ef85b45d65f3, type: 3}
-  _additionalPieceSet: {fileID: 11400000, guid: b79d4cc7a5a593748b7cc15965e364be, type: 2}
+  _additionalPieceSet: {fileID: 11400000, guid: e6482879777a93540a98da173ad0f811, type: 2}
   _skill1: {fileID: 11400000, guid: 8e6af65a0e9c5714fb1ad50ffffc1a89, type: 2}
   _skill2: {fileID: 11400000, guid: 0bbc8bba0dfceed4d855231b5a7b90eb, type: 2}

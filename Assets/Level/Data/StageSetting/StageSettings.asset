@@ -27,6 +27,24 @@ MonoBehaviour:
       _spawnWeight: 5
     - _pieceType: 2
       _spawnWeight: 5
+  - _heightThreshold: 5
+    _castlePartType: 1
+    _weightedPieceTypes:
+    - _pieceType: 0
+      _spawnWeight: 20
+    - _pieceType: 1
+      _spawnWeight: 5
+    - _pieceType: 2
+      _spawnWeight: 5
+  - _heightThreshold: 16
+    _castlePartType: 2
+    _weightedPieceTypes:
+    - _pieceType: 0
+      _spawnWeight: 20
+    - _pieceType: 1
+      _spawnWeight: 5
+    - _pieceType: 2
+      _spawnWeight: 20
   _commonPieceSet: {fileID: 11400000, guid: b79d4cc7a5a593748b7cc15965e364be, type: 2}
   _useGlobalPiecePhysicsSettings: 0
   _globalPiecePhysicsSettings: {fileID: 0}

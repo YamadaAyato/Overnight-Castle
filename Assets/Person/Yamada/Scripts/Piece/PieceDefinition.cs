@@ -32,7 +32,7 @@ public class PieceDefinition : ScriptableObject
     [SerializeField] private CastlePartType _partType = CastlePartType.Foundation;
 
     [Header("スコア設定")]
-    [SerializeField, Min(0f)] private int _score = 0;
+    [SerializeField] private int _score = 0;
 
     [Header("物理設定")]
     [SerializeField] private PiecePhysicsSettings _physicsSettings = new();

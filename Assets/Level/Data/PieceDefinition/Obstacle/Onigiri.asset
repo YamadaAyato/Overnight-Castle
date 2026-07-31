@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7afff082e9331147a9a34d2edcd20c5, type: 3}
-  m_Name: Bomb
+  m_Name: Onigiri
   m_EditorClassIdentifier: Assembly-CSharp::PieceDefinition
-  _sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  _sprite: {fileID: 21300000, guid: 7e72d0a7b55a50c41a946cfa0273697b, type: 3}
   _pieceType: 2
   _partType: 0
-  _score: 0
+  _score: -3000
   _physicsSettings:
     _mass: 1
     _gravityScale: 1
     _linearDamping: 0
     _angularDamping: 0
-  _prefab: {fileID: 2036582497748324834, guid: 7730d12513ee3a14a9eea5bb2bc866b7, type: 3}
+  _prefab: {fileID: 0}
