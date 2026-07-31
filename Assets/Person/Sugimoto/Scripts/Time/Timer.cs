@@ -32,11 +32,22 @@ public class Timer : MonoBehaviour
         _maxTime = time;
         _currentTime = time;
         _isRunning = true;
+
+        UpdateTimerImage();
     }
 
     public void AddTime(float time)
     {
+        if(!_isRunning ||
+            time <= 0) 
+        {
+            return;
+        }
+
+        _maxTime += time;
         _currentTime += time;
+
+        UpdateTimerImage();
         Debug.Log($"AddTime: {time}, CurrentTime: {_currentTime}");
     }
 
@@ -68,7 +79,7 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            _timerImage.fillAmount = _currentTime / _maxTime;
+            UpdateTimerImage();
         }
     }
 
@@ -80,11 +91,22 @@ public class Timer : MonoBehaviour
         }
     }
 
+    private void UpdateTimerImage()
+    {
+        if(_timerImage != null)
+        {
+            _timerImage.fillAmount = Mathf.Clamp01(_currentTime / _maxTime);
+        }
+    }
+
     private void TimerReset()
     {
         _isRunning = false;
         _currentTime = 0;
-        _timerImage.fillAmount = 0;
+
+        UpdateTimerImage() ;
+
         OnTimeUp?.Invoke();
+        Debug.Log("Time's up!");
     }
 }
