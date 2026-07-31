@@ -36,6 +36,8 @@ public class PieceSpawner : MonoBehaviour
             ? _spawnPoint.position.y
             : 0f;
 
+        _highestReachedStep = 0;
+
         return true;
     }
 
@@ -108,11 +110,13 @@ public class PieceSpawner : MonoBehaviour
 
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private FallingPiece _defaultPiecePrefab;
+    [SerializeField, Min(0.1f)] private float _spawnPointHeightStep = 5f;
 
     private StageSettings _stageSettings;
     private CharacterDefinition _characterDefinition;
     private PieceDefinition _nextPieceDefinition;
     private float _initialSpawnPointY;
+    private int _highestReachedStep;
 
     /// <summary>
     ///     SpawnTableと抽選補正に応じたピース定義を抽選して取得する
@@ -150,8 +154,19 @@ public class PieceSpawner : MonoBehaviour
             return;
         }
 
+        int currentStep = Mathf.Max(
+            0,
+            Mathf.FloorToInt((currentHeight) / _spawnPointHeightStep));
+
+        if (currentStep == _highestReachedStep)
+        {
+            return;
+        }
+
+        _highestReachedStep = currentStep;
+
         Vector3 position = _spawnPoint.position;
-        position.y = currentHeight + _initialSpawnPointY;
+        position.y = _initialSpawnPointY + _highestReachedStep * _spawnPointHeightStep;
         _spawnPoint.position = position;
     }
 
