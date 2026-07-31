@@ -15,7 +15,7 @@ public class TargetCamera : MonoBehaviour
     private float _initialTargetY;
     private float _initialOrthographicSize;
     private float _zoomVelocity;
-    private bool _isTrackingEnabled;
+    private bool _isTrackingEnabled　= true;
 
     public void SetTrackingEnabled(bool isEnabled)
     {
