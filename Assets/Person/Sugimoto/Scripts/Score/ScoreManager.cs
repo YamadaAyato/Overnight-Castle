@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 /// <summary>
@@ -13,17 +14,23 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private ScoreSender _scoreSender;
     [SerializeField] private ScoreUI _scoreUI;
-
+    [SerializeField] private CameraAnimation _cameraTest;
 
     public void SetCastleScoreResult(CastleScoreResult castleScoreResult)
     {
         ScoreResult = castleScoreResult;
+        bool isMax = false;
 
         if (ScoreResult.TotalScore > MaxScore)
         {
-            MaxScore = ScoreResult.TotalScore;
+            isMax = true;
         }
-        _scoreUI.SetUI(ScoreResult);
+
+        _cameraTest.PlayCameraMove()
+        .OnComplete(() =>
+        {
+            _scoreUI.SetUI(ScoreResult, isMax);
+        });
     }
 
     /// <summary>
