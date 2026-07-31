@@ -247,6 +247,9 @@ MonoBehaviour:
   _stageSettings: {fileID: 11400000, guid: 5d06f195712126b46ad69e8bb385815e, type: 2}
   _characterSkillController: {fileID: 1666114295}
   _characterDefinition: {fileID: 11400000, guid: c32501812dc25c545b77dea18443cbd4, type: 2}
+  _stopLinearVelocityThreshold: 0.05
+  _stopAngularVelocityThreshold: 2
+  _requiredStopDuration: 1
 --- !u!114 &128289742
 MonoBehaviour:
   m_ObjectHideFlags: 0
