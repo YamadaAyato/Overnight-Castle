@@ -24,7 +24,8 @@ public class InGameManager : MonoBehaviour
     /// </summary>
     public void SpawnPiece()
     {
-        if (_isGameFinished)
+        if (_isTimeUp ||
+            _isGameFinished)
         {
             return;
         }
@@ -91,11 +92,15 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private StageSettings _stageSettings;
     [SerializeField] private CharacterSkillController _characterSkillController;
     [SerializeField] private CharacterDefinition _characterDefinition;
+    [SerializeField, Min(0f)] private float _stopLinearVelocityThreshold = 0.05f;
+    [SerializeField, Min(0f)] private float _stopAngularVelocityThreshold = 2f;
+    [SerializeField, Min(0f)] private float _requiredStopDuration = 0.5f;
 
     private readonly List<FallingPiece> _spawnedPieces = new List<FallingPiece>();
     private readonly PieceSpawnModifiers _modifiers = new();
 
     private bool _isWaitingForNextPiece;
+    private bool _isTimeUp;
     private bool _isGameFinished;
 
     private void Start()
@@ -115,14 +120,14 @@ public class InGameManager : MonoBehaviour
             return;
         }
 
-        if(!_characterSkillController.Initialize(_characterDefinition, _modifiers, Timer.Instance))
+        if (!_characterSkillController.Initialize(_characterDefinition, _modifiers, Timer.Instance))
         {
             enabled = false;
             return;
         }
 
         _controller.OnPieceDropped += HandlePieceDropped;
-        Timer.Instance.OnTimeUp += FinishGame;
+        Timer.Instance.OnTimeUp += HandleTimeUp;
 
         _controller.SetStageWidth(_stageSettings.StageWidth);
         _controller.StartControl();
@@ -142,7 +147,7 @@ public class InGameManager : MonoBehaviour
 
         if (Timer.Instance != null)
         {
-            Timer.Instance.OnTimeUp -= FinishGame;
+            Timer.Instance.OnTimeUp -= HandleTimeUp;
         }
     }
 
@@ -153,12 +158,98 @@ public class InGameManager : MonoBehaviour
     private void HandlePieceDropped(FallingPiece piece)
     {
         if (_isGameFinished ||
-            _isWaitingForNextPiece)
+            _isWaitingForNextPiece ||
+            _isTimeUp)
         {
             return;
         }
 
         _ = SpawnNextPieceAsync();
+    }
+
+    /// <summary>
+    ///     タイムアップ時の処理
+    /// </summary>
+    private void HandleTimeUp()
+    {
+        if (_isTimeUp ||
+            _isGameFinished)
+        {
+            return;
+        }
+
+        _isTimeUp = true;
+
+        _characterSkillController.StopAllSkills();
+        _modifiers.ResetAllWeightMultipliers();
+
+        // タイムアップ時は、ピースの操作を停止し、落下中のピースが停止するまで待機する
+        _controller.StopControl();
+        _ = WaitForDroppedPiecesToStopAsync();
+    }
+
+    /// <summary>
+    ///     落下中のピースがすべて停止しているかどうかを判定する
+    /// </summary>
+    /// <returns></returns>
+    private bool AreAllPiecesStopped()
+    {
+        foreach (var piece in _spawnedPieces)
+        {
+            if (piece == null ||
+                !piece.HasDropped)
+            {
+                continue;
+            }
+
+            if (!piece.IsStopped(
+                _stopLinearVelocityThreshold,
+                _stopAngularVelocityThreshold))
+            {
+                return false;
+            }
+
+            BombPiece bombPiece = piece.GetComponent<BombPiece>();
+
+            if (bombPiece != null &&
+                bombPiece.IsWaitingToExplode)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    ///     落下中のピースがすべて停止するまで待機する
+    /// </summary>
+    /// <returns></returns>
+    private async Awaitable WaitForDroppedPiecesToStopAsync()
+    {
+        float stoppedDuration = 0f;
+
+        try
+        {
+            while (stoppedDuration < _requiredStopDuration)
+            {
+                if(AreAllPiecesStopped())
+                {
+                    stoppedDuration += Time.deltaTime;
+                }
+                else
+                {
+                    stoppedDuration = 0f;
+                }
+                await Awaitable.NextFrameAsync();
+            }
+        }
+        catch(OperationCanceledException)
+        {
+            return;
+        }
+
+        FinishGame();
     }
 
     /// <summary>
@@ -186,7 +277,8 @@ public class InGameManager : MonoBehaviour
         }
 
         // ゲームが終了していない場合のみ、次のピースを生成する
-        if (_isGameFinished)
+        if (_isGameFinished ||
+            _isTimeUp)
         {
             return;
         }
@@ -204,7 +296,7 @@ public class InGameManager : MonoBehaviour
 
         foreach (var piece in _spawnedPieces)
         {
-            if (piece == null ||!piece.HasLanded)
+            if (piece == null || !piece.HasLanded)
             {
                 continue;
             }
@@ -236,7 +328,7 @@ public class InGameManager : MonoBehaviour
             Debug.LogError("Spawnerが設定されていません。");
             return false;
         }
-        if(_scoreManager == null)
+        if (_scoreManager == null)
         {
             Debug.LogError("ScoreManagerが設定されていません。");
             return false;
