@@ -32,9 +32,9 @@ public class CameraAnimation : MonoBehaviour
     {
         _orthographicSize = _cinemachineCamera.Lens.OrthographicSize;
         
-        _target1Pos = new Vector3(_target1.position.x,_target1.position.y,transform.position.z);
-        _target2Pos = new Vector3( _target2.position.x, _target2.position.y, transform.position.z);
-        _target3Pos = new Vector3(_target3.position.x,_target3.position.y,transform.position.z);
+        _target1Pos = new Vector3(_target1.position.x,_target1.position.y, _cinemachineCamera.transform.position.z);
+        _target2Pos = new Vector3( _target2.position.x, _target2.position.y, _cinemachineCamera.transform.position.z);
+        _target3Pos = new Vector3(_target3.position.x,_target3.position.y, _cinemachineCamera.transform.position.z);
         _pos = new Vector3(0, 0, -10);
     }
 

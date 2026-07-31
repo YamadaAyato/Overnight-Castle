@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private ScoreSender _scoreSender;
     [SerializeField] private ScoreUI _scoreUI;
-    [SerializeField] private CameraAnimation _cameraTest;
+    [SerializeField] private CameraAnimation _cameraAnimation;
 
     public void SetCastleScoreResult(CastleScoreResult castleScoreResult)
     {
@@ -26,7 +26,7 @@ public class ScoreManager : MonoBehaviour
             isMax = true;
         }
 
-        _cameraTest.PlayCameraMove()
+        _cameraAnimation.PlayCameraMove()
         .OnComplete(() =>
         {
             _scoreUI.SetUI(ScoreResult, isMax);
