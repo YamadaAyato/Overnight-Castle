@@ -108,6 +108,60 @@ public class PieceSpawner : MonoBehaviour
         return piece;
     }
 
+    /// <summary>
+    ///     指定されたピース定義、位置、回転に基づいてピースを生成する
+    /// </summary>
+    /// <param name="pieceDefinition">ピース定義</param>
+    /// <param name="position">生成位置</param>
+    /// <param name="rotation">生成回転</param>
+    /// <returns>生成されたピース</returns>
+    public FallingPiece CreatePiece(
+        PieceDefinition pieceDefinition,
+        Vector3 position,
+        Quaternion rotation)
+    {
+        if (pieceDefinition == null)
+        {
+            Debug.LogError("生成するピース定義が設定されていません。", this);
+            return null;
+        }
+
+        // ピースを生成する
+        FallingPiece prefab = pieceDefinition.PrefabOverride != null
+            ? pieceDefinition.PrefabOverride
+            : _defaultPiecePrefab;
+
+        FallingPiece piece = Instantiate(
+            prefab,
+            position,
+            rotation);
+        piece.Initialize(
+            pieceDefinition,
+            GetGlobalPiecePhysicsSettings(),
+            _stageSettings.DeletePositionY);
+        return piece;
+    }
+
+    /// <summary>
+    ///     現在の高さに応じたSpawnTableとPieceTypeに基づいて、ランダムにピース定義を取得する
+    /// </summary>
+    /// <param name="height">現在の高さ</param>
+    /// <param name="pieceType">ピースの種類</param>
+    /// <returns>ランダムに選択されたピース定義</returns>
+    public PieceDefinition GetRandomPieceDefinition(float height, PieceType pieceType)
+    {
+        HeightSpawnTable spawnTable = GetSpawnTable(height);
+
+        if (spawnTable == null)
+        {
+            return null;
+        }
+
+        return SelectPieceByWeight(
+            spawnTable.CastlePartType,
+            pieceType);
+    }
+
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private FallingPiece _defaultPiecePrefab;
     [SerializeField, Min(0.1f)] private float _spawnPointHeightStep = 5f;

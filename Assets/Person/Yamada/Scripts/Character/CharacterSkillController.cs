@@ -23,11 +23,13 @@ public class CharacterSkillController : MonoBehaviour
     /// <param name="characterDefinition">キャラクターの定義</param>
     /// <param name="pieceSpawnModifiers">ピース生成の修飾子</param>
     /// <param name="timer">タイマー</param>
+    /// <param name="inGameManager">InGameManagerのインスタンス</param>
     /// <returns>初期化が成功したかどうか</returns>
     public bool Initialize(
         CharacterDefinition characterDefinition,
         PieceSpawnModifiers pieceSpawnModifiers,
-        Timer timer)
+        Timer timer,
+        InGameManager inGameManager)
     {
         if (characterDefinition == null ||
             characterDefinition.Skill1 == null ||
@@ -49,8 +51,14 @@ public class CharacterSkillController : MonoBehaviour
             return false;
         }
 
+        if (inGameManager == null)
+        {
+            Debug.LogError("InGameManagerがnullです", this);
+            return false;
+        }
+
         _skillContext =
-            new CharacterSkillContext(pieceSpawnModifiers, timer, destroyCancellationToken);
+            new CharacterSkillContext(pieceSpawnModifiers, timer, inGameManager, destroyCancellationToken);
         _firstSkillRuntime =
             new CharacterSkillRuntime(characterDefinition.Skill1);
         _secondSkillRuntime =
