@@ -32,11 +32,4 @@ public class CharacterImageSpawner : MonoBehaviour
         // 初期状態の画像、アニメーションを反映
         _currentInstance.PlayImageType();
     }
-
-    [SerializeField] private CharacterImageSpawner _spawner;
-
-    public void OnClickMage()
-    {
-        _spawner.Spawn(CharacterType.Lord);
-    }
 }
