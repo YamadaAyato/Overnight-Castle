@@ -1,4 +1,5 @@
 using DG.Tweening;
+using GameFoundation.Runtime.Attributers;
 using UnityEngine;
 
 /// <summary>
@@ -16,6 +17,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private ScoreUI _scoreUI;
     [SerializeField] private CameraAnimation _cameraAnimation;
     [SerializeField] private TargetCamera _targetCamera;
+    [SerializeField, SceneNameSelector] private string _returnSceneName;
+
+    private bool _isReturnedToTitle = false;
 
     public void SetCastleScoreResult(CastleScoreResult castleScoreResult)
     {
@@ -49,5 +53,26 @@ public class ScoreManager : MonoBehaviour
     public void SendMaxScore()
     {
         _scoreSender.SendHighScore(MaxScore);
+    }
+
+    /// <summary>
+    ///     タイトルに戻る
+    /// </summary>
+    public void ReturnToTitle()
+    {
+        if(_isReturnedToTitle)
+        {
+            return;
+        }
+
+        if(string.IsNullOrEmpty(_returnSceneName))
+        {
+            Debug.LogError("ReturnSceneNameが設定されていません", this);
+            return;
+        }
+
+        _isReturnedToTitle = true;
+        GameSession.Clear();
+        SceneLoader.LoadScene(_returnSceneName);
     }
 }
