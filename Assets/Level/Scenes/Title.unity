@@ -2071,16 +2071,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChengUI
   _upObjs:
-  - {fileID: 788041145}
-  _upImageIndex: 300
+  - {fileID: 788041146}
+  _upImagePositionY: 800
   _downObjs:
-  - {fileID: 1162864094}
-  _downImageIndex: -100
-  _previewObj: {fileID: 1923946376}
-  _imageIndex: 250
-  _buttonObj: {fileID: 2134137479}
-  _buttonIndex: 325
-  _takesTime: 1
+  - {fileID: 1162864095}
+  _downImagePositionY: -800
+  _previewObj: {fileID: 1923946377}
+  _previewPositionX: 550
+  _buttonObj: {fileID: 2134137480}
+  _buttonPositionX: 850
+  _duration: 1
 --- !u!4 &1695131202
 Transform:
   m_ObjectHideFlags: 0
