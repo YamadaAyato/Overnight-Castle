@@ -16,7 +16,7 @@ MonoBehaviour:
   _nextSpawnDelay: 1.5
   _groundPosY: -4
   _deletePositionY: -5
-  _stageWidth: 17
+  _stageWidth: 10
   _heightSpawnTables:
   - _heightThreshold: 0
     _castlePartType: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
       _spawnWeight: 5
     - _pieceType: 2
       _spawnWeight: 3
-  - _heightThreshold: 5
+  - _heightThreshold: 4
     _castlePartType: 1
     _weightedPieceTypes:
     - _pieceType: 0
