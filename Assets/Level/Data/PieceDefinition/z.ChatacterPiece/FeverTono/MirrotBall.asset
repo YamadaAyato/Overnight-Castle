@@ -21,4 +21,4 @@ MonoBehaviour:
     _gravityScale: 1
     _linearDamping: 0
     _angularDamping: 0
-  _prefab: {fileID: 0}
+  _prefab: {fileID: 652989843267835607, guid: ba5e9ade5890cf94a95aa7e1c2c70095, type: 3}
