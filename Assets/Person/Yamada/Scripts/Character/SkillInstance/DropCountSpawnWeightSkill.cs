@@ -1,12 +1,15 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+///     指定された種類のピースの出現確率に補正を適用するスキル効果クラス
+/// </summary>
 [Serializable]
 public class DropCountSpawnWeightSkill : CharacterSkillEffectBase
 {
     public override void ExecuteEffect(CharacterSkillContext context)
     {
-        
+        context.AddDrawCountWeightMultiplier(_pieceType, _spawnWeightMultiplier, _drawCount);
     }
 
     [SerializeField,Tooltip("補正するピースの種類")] 

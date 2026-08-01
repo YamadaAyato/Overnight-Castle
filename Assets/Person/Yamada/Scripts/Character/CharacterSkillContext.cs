@@ -10,10 +10,12 @@ public class CharacterSkillContext
     public CharacterSkillContext(
         PieceSpawnModifiers modifiers,
         Timer timer,
+        InGameManager inGameManager,
         CancellationToken cancellationToken)
     {
         _modifiers = modifiers ?? throw new ArgumentNullException(nameof(modifiers));
         _timer = timer ?? throw new ArgumentNullException(nameof(timer));
+        _inGameManager = inGameManager ?? throw new ArgumentNullException(nameof(inGameManager));
         _cancellationToken = cancellationToken;
     }
 
@@ -57,15 +59,43 @@ public class CharacterSkillContext
             throw new ArgumentOutOfRangeException(nameof(duration), "Duration must be greater than zero.");
         }
 
-        _modifiers.AddWeightMultiplier(type, multiplier);
         int modifierId = _modifiers.AddWeightMultiplier(type, multiplier);
 
         // 非同期で指定された時間が経過した後に重み補正を削除する
         _ = RemoveTimedWeightMultiplierAsync(modifierId, duration);
     }
 
+    /// <summary>
+    ///     指定された種類のピースを、指定されたモードに従って削除する
+    /// </summary>
+    /// <param name="type">ピースの種類</param>
+    /// <param name="targetMode">削除モード</param>
+    /// <param name="count">削除するピースの数</param>
+    public void RemoveBoardPieces(
+        PieceType type,
+        BoardPieceTargetMode targetMode,
+        int count = 0)
+    {
+        _inGameManager.RemovedPieces(type, targetMode, count);
+    }
+
+    /// <summary>
+    ///     指定された種類の障害物ピースを、指定された種類のピースに変換する
+    /// </summary>
+    /// <param name="toType">変換後のピースの種類</param>
+    /// <param name="targetMode">変換モード</param>
+    /// <param name="count">変換するピースの数</param>
+    public void ConvertObstaclePieces(
+        PieceType toType,
+        BoardPieceTargetMode targetMode,
+        int count = 0)
+    {
+        _inGameManager.ConvertObstaclePieces(toType, targetMode, count);
+    }
+
     private readonly PieceSpawnModifiers _modifiers;
     private readonly Timer _timer;
+    private readonly InGameManager _inGameManager;
     private readonly CancellationToken _cancellationToken;
 
     /// <summary>
