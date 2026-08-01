@@ -1,37 +1,58 @@
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UI;
 
 public class ChengUI : MonoBehaviour
 {
     [Header("変えたときに移動するUI")]
-    [SerializeField] private GameObject[] _upObjs;
-    [SerializeField] private int _upImageIndex = 5;
-    [SerializeField] private GameObject[] _downObjs;
-    [SerializeField] private int _downImageIndex = 5;
+    [SerializeField] private RectTransform[] _upObjs;
+    [SerializeField] private float _upImagePositionY = 5f;
 
-    [Header("横からスライドさせるイメージ")]
-    [SerializeField] private GameObject _previewObj;
-    [SerializeField] private int _imageIndex = 1500;
+    [SerializeField] private RectTransform[] _downObjs;
+    [SerializeField] private float _downImagePositionY = 5f;
 
-    [SerializeField] private GameObject _buttonObj;
-    [SerializeField] private int _buttonIndex = -450;
+    [Header("横からスライドさせるUI")]
+    [SerializeField] private RectTransform _previewObj;
+    [SerializeField] private float _previewPositionX = 1500f;
 
-    [SerializeField] private int _takesTime = 1;
+    [SerializeField] private RectTransform _buttonObj;
+    [SerializeField] private float _buttonPositionX = -450f;
+
+    [SerializeField, Min(0f)] private float _duration = 1f;
 
     public void UIChange()
     {
-        foreach (var imageObject in _upObjs)
+        foreach (RectTransform rectTransform in _upObjs)
         {
-            imageObject.transform.DOMoveY(_upImageIndex, _takesTime);
+            if (rectTransform == null)
+            {
+                continue;
+            }
+
+            rectTransform.DOKill();
+            rectTransform.DOAnchorPosY(_upImagePositionY, _duration);
         }
 
-        foreach (var imageObject in _downObjs)
+        foreach (RectTransform rectTransform in _downObjs)
         {
-            imageObject.transform.DOMoveY(_downImageIndex, _takesTime);
+            if (rectTransform == null)
+            {
+                continue;
+            }
+
+            rectTransform.DOKill();
+            rectTransform.DOAnchorPosY(_downImagePositionY, _duration);
         }
 
-        _previewObj.transform.DOMoveX(_imageIndex, _takesTime);
-        _buttonObj.transform.DOMoveX(_buttonIndex, _takesTime);
+        if (_previewObj != null)
+        {
+            _previewObj.DOKill();
+            _previewObj.DOAnchorPosX(_previewPositionX, _duration);
+        }
+
+        if (_buttonObj != null)
+        {
+            _buttonObj.DOKill();
+            _buttonObj.DOAnchorPosX(_buttonPositionX, _duration);
+        }
     }
 }
