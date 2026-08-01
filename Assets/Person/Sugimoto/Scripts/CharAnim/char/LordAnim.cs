@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class ChangeImageAnim : ChangeImageAnimBase
+public class LordAnim : ChangeImageAnimBase
 {
     [Header("Normal Animation")]
     [SerializeField] private float _rotateAngle = 15f;
