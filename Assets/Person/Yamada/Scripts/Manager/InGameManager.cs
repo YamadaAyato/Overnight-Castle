@@ -86,6 +86,97 @@ public class InGameManager : MonoBehaviour
         OnGameFinished?.Invoke();
     }
 
+    /// <summary>
+    ///     指定されたピースタイプのピースを削除する
+    /// </summary>
+    /// <param name="targetPieceType">削除対象のピースタイプ</param>
+    /// <param name="targetMode">削除モード</param>
+    /// <param name="targetCount">削除するピースの数</param>
+    public void RemovedPieces(
+        PieceType targetPieceType,
+        BoardPieceTargetMode targetMode,
+        int targetCount)
+    {
+        List<FallingPiece> targets = GetSkillTargets(targetPieceType);
+        int removeCount = GetEffectTargetCount(
+            targets.Count,
+            targetMode,
+            targetCount);
+
+        if (targetMode == BoardPieceTargetMode.SpecifiedCount)
+        {
+            ShufflePieces(targets);
+        }
+
+        for (int i = 0; i < removeCount; i++)
+        {
+            FallingPiece piece = targets[i];
+            if (piece != null)
+            {
+                _spawnedPieces.Remove(piece);
+                Destroy(piece.gameObject);
+            }
+        }
+    }
+
+    /// <summary>
+    ///     障害物ピースを指定されたピースタイプに変換する
+    /// </summary>
+    /// <param name="targetPieceType">変換後のピースタイプ</param>
+    /// <param name="targetMode">変換モード</param>
+    /// <param name="targetCount">変換するピースの数</param>
+    public void ConvertObstaclePieces(
+        PieceType targetPieceType,
+        BoardPieceTargetMode targetMode,
+        int targetCount)
+    {
+        if (targetPieceType == PieceType.Obstacle)
+        {
+            return;
+        }
+
+        List<FallingPiece> targets = GetSkillTargets(PieceType.Obstacle);
+        int convertCount = GetEffectTargetCount(
+            targets.Count,
+            targetMode,
+            targetCount);
+
+        if (targetMode == BoardPieceTargetMode.SpecifiedCount)
+        {
+            ShufflePieces(targets);
+        }
+
+        for (int i = 0; i < convertCount; i++)
+        {
+            FallingPiece piece = targets[i];
+
+            float height = Mathf.Max(0f, piece.transform.position.y - _stageSettings.GroundPosY);
+
+            PieceDefinition convertedDefinition =
+                _spawner.GetRandomPieceDefinition(height, targetPieceType);
+
+            if (convertedDefinition == null)
+            {
+                continue;
+            }
+
+            FallingPiece convertedPiece =
+                _spawner.CreatePiece(convertedDefinition, piece.transform.position, piece.transform.rotation);
+
+            if (convertedPiece == null)
+            {
+                continue;
+            }
+
+            _spawnedPieces.Remove(piece);
+            piece.gameObject.SetActive(false);
+            Destroy(piece.gameObject);
+
+            convertedPiece.Drop();
+            _spawnedPieces.Add(convertedPiece);
+        }
+    }
+
     [SerializeField] private PieceController _controller;
     [SerializeField] private PieceSpawner _spawner;
     [SerializeField] private ScoreManager _scoreManager;
@@ -109,6 +200,15 @@ public class InGameManager : MonoBehaviour
     {
         Debug.Log("ゲーム開始。", this);
 
+        CharacterDefinition selectedCharacter = GetCharacterDefinition();
+
+        if (selectedCharacter == null)
+        {
+            Debug.LogError("キャラクター定義が設定されていません。", this);
+            enabled = false;
+            return;
+        }
+
         if (!ValidateSettings())
         {
             enabled = false;
@@ -116,13 +216,13 @@ public class InGameManager : MonoBehaviour
         }
 
         // Spawnerの初期化を行う
-        if (!_spawner.Initialize(_stageSettings, _characterDefinition))
+        if (!_spawner.Initialize(_stageSettings, selectedCharacter))
         {
             enabled = false;
             return;
         }
 
-        if (!_characterSkillController.Initialize(_characterDefinition, _modifiers, Timer.Instance))
+        if (!_characterSkillController.Initialize(selectedCharacter, _modifiers, Timer.Instance, this))
         {
             enabled = false;
             return;
@@ -154,6 +254,36 @@ public class InGameManager : MonoBehaviour
         {
             Timer.Instance.OnTimeUp -= HandleTimeUp;
         }
+    }
+
+    /// <summary>
+    ///     指定されたピースタイプのスキル対象となるピースを取得する
+    /// </summary>
+    /// <param name="pieceType">ピースタイプ</param>
+    /// <returns>スキル対象となるピースのリスト</returns>
+    private List<FallingPiece> GetSkillTargets(PieceType pieceType)
+    {
+        List<FallingPiece> targets = new List<FallingPiece>();
+
+        foreach (var piece in _spawnedPieces)
+        {
+            if (piece == null ||
+                !piece.HasDropped ||
+                !piece.HasLanded ||
+                piece.PieceType != pieceType)
+            {
+                continue;
+            }
+
+            if (!piece.IsStopped(
+                _stopLinearVelocityThreshold,
+                _stopAngularVelocityThreshold))
+            {
+                continue;
+            }
+            targets.Add(piece);
+        }
+        return targets;
     }
 
     /// <summary>
@@ -238,7 +368,7 @@ public class InGameManager : MonoBehaviour
         {
             while (stoppedDuration < _requiredStopDuration)
             {
-                if(AreAllPiecesStopped())
+                if (AreAllPiecesStopped())
                 {
                     stoppedDuration += Time.deltaTime;
                 }
@@ -249,7 +379,7 @@ public class InGameManager : MonoBehaviour
                 await Awaitable.NextFrameAsync();
             }
         }
-        catch(OperationCanceledException)
+        catch (OperationCanceledException)
         {
             return;
         }
@@ -318,6 +448,21 @@ public class InGameManager : MonoBehaviour
     }
 
     /// <summary>
+    ///     現在のキャラクター定義を取得する
+    /// </summary>
+    /// <returns>現在のキャラクター定義</returns>
+    private CharacterDefinition GetCharacterDefinition()
+    {
+        if (GameSession.TryGetSelectedCharacter(out CharacterDefinition character))
+        {
+            return character;
+        }
+
+        // このシーンで選択されたキャラクターがない場合は、デフォルトのキャラクター定義を返す
+        return _characterDefinition;
+    }
+
+    /// <summary>
     ///     ゲームの初期化処理を行う
     /// </summary>
     /// <returns>設定が有効かどうか</returns>
@@ -360,5 +505,41 @@ public class InGameManager : MonoBehaviour
         }
 
         return true;
+    }
+
+    /// <summary>
+    ///     指定されたターゲットモードに基づいて、効果の対象となるピースの数を取得する
+    /// </summary>
+    /// <param name="availableCount">利用可能なピースの数</param>
+    /// <param name="targetMode">ターゲットモード</param>
+    /// <param name="specifiedCount">指定されたピースの数</param>
+    /// <returns>効果の対象となるピースの数</returns>
+    private static int GetEffectTargetCount(
+        int availableCount,
+        BoardPieceTargetMode targetMode,
+        int specifiedCount)
+    {
+        if (targetMode == BoardPieceTargetMode.All)
+        {
+            return availableCount;
+        }
+
+        return Mathf.Min(availableCount, Mathf.Max(0, specifiedCount));
+    }
+
+    /// <summary>
+    ///     ピースのリストをシャッフルする
+    /// </summary>
+    /// <param name="pieces">シャッフルするピースのリスト</param>
+    private static void ShufflePieces(List<FallingPiece> pieces)
+    {
+        for (int i = pieces.Count - 1; i > 0; i--)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, i + 1);
+
+            FallingPiece temp = pieces[i];
+            pieces[i] = pieces[randomIndex];
+            pieces[randomIndex] = temp;
+        }
     }
 }
