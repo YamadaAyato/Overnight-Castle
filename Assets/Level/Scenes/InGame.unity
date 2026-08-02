@@ -804,6 +804,10 @@ MonoBehaviour:
   _characterPrefabs:
   - _characterType: 0
     _prefab: {fileID: 7985926403273718051, guid: c09adbd4d116b8441a4662f398ba17cd, type: 3}
+  - _characterType: 1
+    _prefab: {fileID: 4183265320577691045, guid: a67561b9d1be2d24894a1b70870ad8a7, type: 3}
+  - _characterType: 2
+    _prefab: {fileID: 5810055104753580641, guid: afa0500285346b54cae0378ee85010c3, type: 3}
   _reactionDuration: 2
 --- !u!1 &186715479
 GameObject:
