@@ -9,6 +9,9 @@ public class PieceSpawner : MonoBehaviour
     /// <summary> 次に生成されるピース定義 </summary>
     public PieceDefinition NextPieceDefinition => _nextPieceDefinition;
 
+    /// <summary> ピースの生成位置 </summary>
+    public Vector3 SpawnPos => _spawnPoint.position;
+
     /// <summary> 次に生成されるピース定義が変更されたときに発火するイベント </summary>
     public event Action<PieceDefinition> OnNextPieceDefinitionChanged;
 

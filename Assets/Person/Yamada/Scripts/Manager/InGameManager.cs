@@ -40,8 +40,6 @@ public class InGameManager : MonoBehaviour
         piece.OnLanded += HandlePieceLanded;
         piece.OnDestroyed += HandlePieceFellBelowDeletePosition;
 
-        _controller.SetCurrentPiece(piece);
-
         if (piece == null)
         {
             Debug.LogError("ピースの生成に失敗しました。", this);
@@ -82,7 +80,7 @@ public class InGameManager : MonoBehaviour
             _stageSettings.HeightScoreMultiplier);
 
         _scoreManager.SetCastleScoreResult(result);
-
+        
         Debug.Log($"ゲーム終了: 高さ={result.Height}, " +
             $"高さスコア={result.HeightScore}, " +
             $"完成度スコア={result.CompletionScore}, " +
@@ -201,6 +199,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private DayCycleBackgroundView _dayCycleBackgroundView;
     [SerializeField] private DayNightCycle _dayNightCycle;
     [SerializeField] private CutInAnimation _cutIn;
+    [SerializeField] private PieceDefinition _timeUpPieceDefinition;
     [SerializeField, Min(0f)] private float _stopLinearVelocityThreshold = 0.05f;
     [SerializeField, Min(0f)] private float _stopAngularVelocityThreshold = 2f;
     [SerializeField, Min(0f)] private float _requiredStopDuration = 0.5f;
@@ -216,7 +215,7 @@ public class InGameManager : MonoBehaviour
     private void Start()
     {
         Debug.Log("ゲーム開始。", this);
-
+        AudioManager.Instance.PlayBGM("InGameBGM");
         CharacterDefinition selectedCharacter = GetCharacterDefinition();
 
         if (selectedCharacter == null)
@@ -359,6 +358,7 @@ public class InGameManager : MonoBehaviour
 
         // タイムアップ時は、ピースの操作を停止し、落下中のピースが停止するまで待機する
         _controller.StopControl();
+        SpawnTimeUpPiece();
         _ = WaitForDroppedPiecesToStopAsync();
     }
 
@@ -378,6 +378,35 @@ public class InGameManager : MonoBehaviour
         {
             _characterImageSpawner.PlayReaction(ImageType.HappyImage);
         }
+    }
+
+    /// <summary>
+    ///     タイムアップ時に落下させるピースを生成する
+    /// </summary>
+    private void SpawnTimeUpPiece()
+    {
+        if (_timeUpPieceDefinition == null)
+        {
+            Debug.LogWarning("TimeUpPieceDefinitionが設定されていません。", this);
+            return;
+        }
+
+        FallingPiece timeUpPiece = _spawner.CreatePiece(
+            _timeUpPieceDefinition,
+            _spawner.SpawnPos,
+            Quaternion.identity);
+
+        if (timeUpPiece == null)
+        {
+            Debug.LogError("タイムアップ用ピースの生成に失敗しました。", this);
+            return;
+        }
+
+        timeUpPiece.OnLanded += HandlePieceLanded;
+        timeUpPiece.OnDestroyed += HandlePieceFellBelowDeletePosition;
+
+        timeUpPiece.Drop();
+        _spawnedPieces.Add(timeUpPiece);
     }
 
     /// <summary>
