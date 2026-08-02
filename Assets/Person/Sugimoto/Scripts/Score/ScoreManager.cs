@@ -34,6 +34,7 @@ public class ScoreManager : MonoBehaviour
             _characterImageManager.PlayAnimation(ImageType.HighScore);
         }
 
+        AudioManager.Instance.PlaySE("ResultText");
         _cameraAnimation.PlayCameraMove()
         .OnComplete(() =>
         {
