@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +36,13 @@ public class FallingPiece : MonoBehaviour
 
     /// <summary> ピースの最高位置Y座標 </summary>
     public float HighestPositionY => _collider2D.bounds.max.y;
+
+    /// <summary> ピースが着地したときに発火するイベント </summary>
+    public event Action<FallingPiece> OnLanded;
+
+
+    /// <summary> ピースが破壊されたときに発火するイベント </summary>
+    public event Action<FallingPiece> OnDestroyed;
 
 
     /// <summary>
@@ -75,6 +83,7 @@ public class FallingPiece : MonoBehaviour
     {
         _hasDropped = false;
         _hasLanded = false;
+        _hasNotifiedDeletion = false;
 
         _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
         _rigidbody2D.gravityScale = 0f;
@@ -141,6 +150,7 @@ public class FallingPiece : MonoBehaviour
     private float _deletePositionY = float.NegativeInfinity;
     private bool _hasDropped;
     private bool _hasLanded;
+    private bool _hasNotifiedDeletion;
 
     private void Awake()
     {
@@ -151,18 +161,25 @@ public class FallingPiece : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.y < _deletePositionY)
+        if (_hasNotifiedDeletion ||
+            transform.position.y >= _deletePositionY)
         {
-            Destroy(gameObject);
+            return;
         }
+
+        _hasNotifiedDeletion = true;
+        OnDestroyed?.Invoke(this);
+
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!_hasDropped)
+        if (!_hasDropped || _hasLanded)
             return;
 
         _hasLanded = true;
+        OnLanded?.Invoke(this);
     }
 
     /// <summary>

@@ -128,7 +128,7 @@ public abstract class ChangeImageAnimBase : MonoBehaviour
                 if (playAnimation) PlayFailureAnimation();
                 break;
 
-            case ImageType.Happyimage:
+            case ImageType.HappyImage:
                 _image.sprite = _happySprite;
                 if (playAnimation) PlayHappyAnimation();
                 break;

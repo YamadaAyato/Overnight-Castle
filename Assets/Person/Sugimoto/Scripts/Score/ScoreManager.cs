@@ -17,6 +17,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private ScoreUI _scoreUI;
     [SerializeField] private CameraAnimation _cameraAnimation;
     [SerializeField] private TargetCamera _targetCamera;
+    [SerializeField] private CharacterImageManager _characterImageManager;
     [SerializeField, SceneNameSelector] private string _returnSceneName;
 
     private bool _isReturnedToTitle = false;
@@ -25,11 +26,12 @@ public class ScoreManager : MonoBehaviour
     {
         _targetCamera.SetTrackingEnabled(false);
         ScoreResult = castleScoreResult;
-        bool isMax = false;
+        bool isMax = ScoreResult.TotalScore > MaxScore;
 
-        if (ScoreResult.TotalScore > MaxScore)
+        if (isMax)
         {
-            isMax = true;
+            MaxScore = ScoreResult.TotalScore;
+            _characterImageManager.PlayAnimation(ImageType.HighScore);
         }
 
         _cameraAnimation.PlayCameraMove()
