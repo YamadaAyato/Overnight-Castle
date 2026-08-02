@@ -213,7 +213,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 121816488}
   - {fileID: 687209772}
   - {fileID: 1709848905}
   m_Father: {fileID: 0}
@@ -223,57 +222,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &121816486
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 121816488}
-  - component: {fileID: 121816487}
-  m_Layer: 0
-  m_Name: CutInAnimation (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &121816487
+--- !u!114 &121816487 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8200168688487642509, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+  m_PrefabInstance: {fileID: 1577043630804470920}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 121816486}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 313edd1d087f84f4eb53970450416ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutInAnimation
-  _cutInPanel: {fileID: 1709848904}
-  _rectMask: {fileID: 1709848906}
-  _showTime: 0.5
-  _waitTime: 0.5
-  _hideTime: 1
-  _charHead: {fileID: 1139082049}
-  _charBode: {fileID: 1259390633}
---- !u!4 &121816488
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 121816486}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 39.377655, y: 40.069344, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 120327930}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &687209771
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,28 +503,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979068152}
   m_CullTransparentMesh: 1
---- !u!114 &1139082049 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8486399810809262809, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
-  m_PrefabInstance: {fileID: 1577043630804470920}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!114 &1259390633 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6608539337067893721, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
-  m_PrefabInstance: {fileID: 1577043630804470920}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1589813390
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,27 +719,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1709848904 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2384059092260025517, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
-  m_PrefabInstance: {fileID: 1577043630804470920}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1709848905 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8544769510267214862, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
   m_PrefabInstance: {fileID: 1577043630804470920}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1709848906 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9044317054138997488, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
-  m_PrefabInstance: {fileID: 1577043630804470920}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709848904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RectMask2D
 --- !u!1001 &1577043630804470920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -814,6 +735,10 @@ PrefabInstance:
     - target: {fileID: 2384059092260025517, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
       propertyPath: m_Name
       value: CutIn
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645964259474006665, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8544769510267214862, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
       propertyPath: m_Pivot.x
@@ -894,6 +819,10 @@ PrefabInstance:
     - target: {fileID: 8544769510267214862, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9044317054138997488, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+      propertyPath: m_Padding.x
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
