@@ -802,6 +802,8 @@ MonoBehaviour:
   _characterPrefabs:
   - characterType: 0
     prefab: {fileID: 7985926403273718051, guid: c09adbd4d116b8441a4662f398ba17cd, type: 3}
+  - characterType: 1
+    prefab: {fileID: 4183265320577691045, guid: a67561b9d1be2d24894a1b70870ad8a7, type: 3}
 --- !u!1 &186715479
 GameObject:
   m_ObjectHideFlags: 0
