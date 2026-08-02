@@ -609,6 +609,7 @@ MonoBehaviour:
   _dayCycleBackgroundView: {fileID: 243012154}
   _dayNightCycle: {fileID: 243012155}
   _cutIn: {fileID: 1122444107}
+  _timeUpPieceDefinition: {fileID: 11400000, guid: 04daeb886ee19614e8f886133e25c6fc, type: 2}
   _stopLinearVelocityThreshold: 0.2
   _stopAngularVelocityThreshold: 2
   _requiredStopDuration: 1
@@ -3364,7 +3365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -218, y: 0}
+  m_AnchoredPosition: {x: -292, y: 0}
   m_SizeDelta: {x: 126, y: 241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1347183194
@@ -5329,6 +5330,7 @@ GameObject:
   - component: {fileID: 1916305162}
   - component: {fileID: 1916305161}
   - component: {fileID: 1916305160}
+  - component: {fileID: 1916305163}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -5412,6 +5414,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1916305163}
+        m_TargetAssemblyTypeName: SEPlayer, Assembly-CSharp
+        m_MethodName: PlaySE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1916305161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5450,6 +5464,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916305158}
   m_CullTransparentMesh: 1
+--- !u!114 &1916305163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916305158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bebea7003e09554dae80db6d7d31c22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SEPlayer
+  _seName: Button
 --- !u!1 &1950531265
 GameObject:
   m_ObjectHideFlags: 0
@@ -5485,7 +5512,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 379, y: 132}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1950531267
 MonoBehaviour:
