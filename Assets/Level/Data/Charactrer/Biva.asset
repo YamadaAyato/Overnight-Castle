@@ -15,7 +15,7 @@ MonoBehaviour:
   _characterName: "\u30D3\u30FC\u30D0\u30FC\u5927\u5DE5"
   _characterSprite: {fileID: 21300000, guid: 8f319206c71956a4dad4ae603ba03eec, type: 3}
   _selectedCharacterSprite: {fileID: 21300000, guid: 3ed332c32ace1d84586c93ea842cab7d, type: 3}
-  _characterType: 0
+  _characterType: 2
   _additionalPieceSet: {fileID: 0}
   _skill1: {fileID: 11400000, guid: 44f4e3f1dfb77c54f835f1d4941e4c7d, type: 2}
   _skill2: {fileID: 11400000, guid: db04db17577e7ec4a99538609644939e, type: 2}
