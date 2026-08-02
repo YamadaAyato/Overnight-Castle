@@ -114,6 +114,7 @@ public class CharacterSkillController : MonoBehaviour
             return false;
         }
 
+        AudioManager.Instance.PlaySE("Cutin");
         OnSkillUsed?.Invoke(skillSlot, skillRuntime.Definition);
 
         return true;
