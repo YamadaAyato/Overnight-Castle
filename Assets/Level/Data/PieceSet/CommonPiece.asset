@@ -45,9 +45,33 @@ MonoBehaviour:
     _spawnWeight: 4
   - _pieceDefinition: {fileID: 11400000, guid: 7a67cbdccc960da489a762ecf29afef6, type: 2}
     _spawnWeight: 2
+  - _pieceDefinition: {fileID: 11400000, guid: 39e2d130651a17a42953d97b934893ff, type: 2}
+    _spawnWeight: 3
   - _pieceDefinition: {fileID: 11400000, guid: 6451658309e0e5b42824f793c15c8c50, type: 2}
     _spawnWeight: 2
   - _pieceDefinition: {fileID: 11400000, guid: 5a690223db8710446b1555e0cdb94e2e, type: 2}
     _spawnWeight: 2
   - _pieceDefinition: {fileID: 11400000, guid: 2027da899407b9b4f9777318065ce684, type: 2}
     _spawnWeight: 1
+  - _pieceDefinition: {fileID: 11400000, guid: febe322fd596ffb41a8e13e7ec54e3b1, type: 2}
+    _spawnWeight: 1
+  - _pieceDefinition: {fileID: 11400000, guid: febe322fd596ffb41a8e13e7ec54e3b1, type: 2}
+    _spawnWeight: 1
+  - _pieceDefinition: {fileID: 11400000, guid: d88bb303aee647944aa77cea913ada7a, type: 2}
+    _spawnWeight: 3
+  - _pieceDefinition: {fileID: 11400000, guid: c2fbdc0448c757d4a8f400c6395a97da, type: 2}
+    _spawnWeight: 3
+  - _pieceDefinition: {fileID: 11400000, guid: 6a1b41a41df46b14f903ec156d388b9c, type: 2}
+    _spawnWeight: 2
+  - _pieceDefinition: {fileID: 11400000, guid: 73c0e50ea76757c45824554d8f9b45b5, type: 2}
+    _spawnWeight: 4
+  - _pieceDefinition: {fileID: 11400000, guid: c421b9308c12c9c48a5d64cf237201f3, type: 2}
+    _spawnWeight: 1
+  - _pieceDefinition: {fileID: 11400000, guid: 8fd3dbb3b8a3fc5498a20ff9632914e6, type: 2}
+    _spawnWeight: 1
+  - _pieceDefinition: {fileID: 11400000, guid: 1aff9196c9654ad40bef11536f63d1de, type: 2}
+    _spawnWeight: 1
+  - _pieceDefinition: {fileID: 11400000, guid: 78c1d0ab34d84ad4ba70ef9f15c79ec2, type: 2}
+    _spawnWeight: 3
+  - _pieceDefinition: {fileID: 11400000, guid: 4d6fe398d1a17cf4b91e7549b2be5921, type: 2}
+    _spawnWeight: 2
