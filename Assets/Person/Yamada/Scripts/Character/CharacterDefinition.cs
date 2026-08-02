@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /// <summary>
 ///     キャラクターの定義を保持するScriptableObject
@@ -15,6 +16,9 @@ public class CharacterDefinition : ScriptableObject
     /// <summary> 選択時のスプライト </summary>
     public Sprite SelectedCharacterSprite => _selectedCharacterSprite;
 
+    /// <summary> キャラクターのタイプ </summary>
+    public CharacterType CharacterType => _characterType;
+
     /// <summary> 共通ピースに追加するピースセット </summary>
     public PieceSet AdditionalPieceSet => _additionalPieceSet;
     
@@ -28,6 +32,7 @@ public class CharacterDefinition : ScriptableObject
     [SerializeField] private string _characterName;
     [SerializeField] private Sprite _characterSprite;
     [SerializeField] private Sprite _selectedCharacterSprite;
+    [SerializeField] private CharacterType _characterType;
     [Header("共通ピースに追加するピースセット")]
     [SerializeField] private PieceSet _additionalPieceSet;
 

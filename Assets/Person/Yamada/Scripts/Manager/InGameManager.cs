@@ -182,6 +182,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private StageSettings _stageSettings;
     [SerializeField] private CharacterSkillController _characterSkillController;
+    [SerializeField] private CharacterImageManager _characterImageSpawner;
     [SerializeField] private CharacterDefinition _characterDefinition;
     [SerializeField] private DayCycleBackgroundView _dayCycleBackgroundView;
     [SerializeField] private DayNightCycle _dayNightCycle;
@@ -226,6 +227,11 @@ public class InGameManager : MonoBehaviour
         {
             enabled = false;
             return;
+        }
+
+        if(_characterImageSpawner != null)
+        {
+            _characterImageSpawner.Spawn(selectedCharacter);
         }
 
         _controller.OnPieceDropped += HandlePieceDropped;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterImageSpawner : MonoBehaviour
+public class CharacterImageManager : MonoBehaviour
 {
     [Serializable]
     private class CharacterPrefab
@@ -16,10 +16,14 @@ public class CharacterImageSpawner : MonoBehaviour
 
     private ChangeImageAnimBase _currentInstance;
 
-    public void Spawn(CharacterType selectedCharacter)
+    /// <summary>
+    /// 指定されたキャラにあったプレハブを生成する
+    /// </summary>
+    /// <param name="selectedCharacter"></param>
+    public void Spawn(CharacterDefinition selectedCharacter)
     {
         CharacterPrefab data = _characterPrefabs.Find(
-            x => x.characterType == selectedCharacter);
+            x => x.characterType == selectedCharacter.CharacterType);
 
         if (data == null || data.prefab == null)
         {
@@ -31,5 +35,14 @@ public class CharacterImageSpawner : MonoBehaviour
 
         // 初期状態の画像、アニメーションを反映
         _currentInstance.PlayImageType();
+    }
+
+    /// <summary>
+    /// 指定の遷移のアニメーションを再生する
+    /// </summary>
+    /// <param name="imageType"></param>
+    public void playAnim(ImageType imageType) 
+    {
+        _currentInstance.SetImageType(imageType);
     }
 }
