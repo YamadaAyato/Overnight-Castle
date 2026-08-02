@@ -190,6 +190,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField, Min(0f)] private float _stopLinearVelocityThreshold = 0.05f;
     [SerializeField, Min(0f)] private float _stopAngularVelocityThreshold = 2f;
     [SerializeField, Min(0f)] private float _requiredStopDuration = 0.5f;
+    [SerializeField, Min(0f)] private float _forceGameEndTime = 5f;
 
     private readonly List<FallingPiece> _spawnedPieces = new List<FallingPiece>();
     private readonly PieceSpawnModifiers _modifiers = new();
@@ -378,10 +379,12 @@ public class InGameManager : MonoBehaviour
     private async Awaitable WaitForDroppedPiecesToStopAsync()
     {
         float stoppedDuration = 0f;
+        float elapsedTime = 0f;
 
         try
         {
-            while (stoppedDuration < _requiredStopDuration)
+            while (stoppedDuration < _requiredStopDuration &&
+                elapsedTime < _forceGameEndTime)
             {
                 if (AreAllPiecesStopped())
                 {
@@ -391,7 +394,10 @@ public class InGameManager : MonoBehaviour
                 {
                     stoppedDuration = 0f;
                 }
-                await Awaitable.NextFrameAsync();
+
+                elapsedTime += Time.deltaTime;
+
+                await Awaitable.NextFrameAsync(destroyCancellationToken);
             }
         }
         catch (OperationCanceledException)
