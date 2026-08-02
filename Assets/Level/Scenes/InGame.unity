@@ -3004,7 +3004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9044317054138997488, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
       propertyPath: m_Padding.x
-      value: 0
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 9044317054138997488, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
       propertyPath: m_Padding.z
