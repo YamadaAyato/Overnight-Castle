@@ -21,6 +21,7 @@ public class CharacterImageManager : MonoBehaviour
 
     private ChangeImageAnimBase _currentInstance;
     private Tween _returnTween;
+    private CharacterType _characterType;
 
     /// <summary>
     /// 指定されたキャラにあったプレハブを生成する
