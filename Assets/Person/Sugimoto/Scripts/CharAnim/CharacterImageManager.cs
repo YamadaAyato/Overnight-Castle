@@ -21,7 +21,9 @@ public class CharacterImageManager : MonoBehaviour
 
     private ChangeImageAnimBase _currentInstance;
     private Tween _returnTween;
-    private CharacterType _characterType;
+    CharacterDefinition a;
+
+
 
     /// <summary>
     /// 指定されたキャラにあったプレハブを生成する
@@ -37,6 +39,7 @@ public class CharacterImageManager : MonoBehaviour
             Debug.LogWarning($"{selectedCharacter} 用のプレハブが未設定です。", this);
             return;
         }
+
 
         _currentInstance = Instantiate(data.prefab, _spawnParent);
         _currentInstance.SetImageType(ImageType.Normal);
