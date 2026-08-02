@@ -11,6 +11,7 @@ public class ScoreUI : MonoBehaviour
 {
     [SerializeField] private Image _backImage;
     [SerializeField] private Image[] _scoreImages;
+    [SerializeField] private GameObject[] _inGameObjects;
 
     [SerializeField]private TextMeshProUGUI _height;
     [SerializeField]private TextMeshProUGUI _heightScore;
@@ -30,6 +31,11 @@ public class ScoreUI : MonoBehaviour
         foreach (Image image in _scoreImages)
         {
             image.gameObject.SetActive(false);
+        }
+
+        foreach (GameObject obj in _inGameObjects)
+        {
+            obj.SetActive(true);
         }
 
         _backImage?.gameObject.SetActive(false);
@@ -60,6 +66,11 @@ public class ScoreUI : MonoBehaviour
         foreach (Image image in _scoreImages)
         {
             image.gameObject.SetActive(false);
+        }
+
+        foreach (GameObject obj in _inGameObjects)
+        {
+            obj.SetActive(false);
         }
 
         _height.gameObject.SetActive(false);
