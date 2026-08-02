@@ -80,7 +80,6 @@ public class CharacterSelectManager : MonoBehaviour
     {
         if (SelectedCharacter == null)
         {
-            Debug.LogError("キャラクターが選択されていません。", this);
             return;
         }
 
