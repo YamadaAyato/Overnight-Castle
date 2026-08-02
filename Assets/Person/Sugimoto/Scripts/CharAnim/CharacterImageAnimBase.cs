@@ -14,6 +14,7 @@ public abstract class ChangeImageAnimBase : MonoBehaviour
     [Header("Sprites")]
     [SerializeField] private Sprite _normalSprite;
     [SerializeField] private Sprite _failureSprite;
+    [SerializeField] private Sprite _happySprite;
     [SerializeField] private Sprite _highScoreSprite;
     [SerializeField] private Sprite _skillImageSprite;
 
@@ -56,6 +57,7 @@ public abstract class ChangeImageAnimBase : MonoBehaviour
 
     protected virtual void PlayNormalAnimation() { }
     protected virtual void PlayFailureAnimation() { }
+    protected virtual void PlayHappyAnimation() { }
     protected virtual void PlayHighScoreAnimation() { }
     protected virtual void PlaySkillAnimation() { }
 
@@ -125,6 +127,12 @@ public abstract class ChangeImageAnimBase : MonoBehaviour
                 _image.sprite = _failureSprite;
                 if (playAnimation) PlayFailureAnimation();
                 break;
+
+            case ImageType.Happyimage:
+                _image.sprite = _happySprite;
+                if (playAnimation) PlayHappyAnimation();
+                break;
+
 
             case ImageType.HighScore:
                 _image.sprite = _highScoreSprite;
