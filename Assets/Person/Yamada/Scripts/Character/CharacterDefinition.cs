@@ -12,6 +12,9 @@ public class CharacterDefinition : ScriptableObject
     /// <summary> キャラクターのスプライト </summary>
     public Sprite CharacterSprite => _characterSprite;
 
+    /// <summary> 選択時のスプライト </summary>
+    public Sprite SelectedCharacterSprite => _selectedCharacterSprite;
+
     /// <summary> 共通ピースに追加するピースセット </summary>
     public PieceSet AdditionalPieceSet => _additionalPieceSet;
     
@@ -24,7 +27,7 @@ public class CharacterDefinition : ScriptableObject
     [Header("キャラクター情報")]
     [SerializeField] private string _characterName;
     [SerializeField] private Sprite _characterSprite;
-
+    [SerializeField] private Sprite _selectedCharacterSprite;
     [Header("共通ピースに追加するピースセット")]
     [SerializeField] private PieceSet _additionalPieceSet;
 

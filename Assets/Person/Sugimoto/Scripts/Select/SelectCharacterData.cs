@@ -18,6 +18,9 @@ public class SelectCharacterData : ScriptableObject
     /// <summary> キャラクターのスプライト </summary>
     public Sprite CharacterSprite => _characterDefinition.CharacterSprite;
 
+    /// <summary> キャラクター選択時のスプライト </summary>
+    public Sprite SelectedCharacterSprite => _characterDefinition.SelectedCharacterSprite;
+
     /// <summary> スキル1の名前 </summary>
     public string SkillName1 => _characterDefinition.Skill1.SkillName;
 
