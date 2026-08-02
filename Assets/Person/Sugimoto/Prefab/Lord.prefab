@@ -268,6 +268,7 @@ MonoBehaviour:
   _imageType: 0
   _normalSprite: {fileID: 21300000, guid: deaf64e2859d1384aa566da8ebea0882, type: 3}
   _failureSprite: {fileID: 21300000, guid: 9155c65c84524ab4a8922184373da2d7, type: 3}
+  _happySprite: {fileID: 21300000, guid: 3364e7cd590a56a4db40286ad7f099dd, type: 3}
   _highScoreSprite: {fileID: 21300000, guid: 816ece28727589c4f85fb82ce8ce8abf, type: 3}
   _skillImageSprite: {fileID: 21300000, guid: 4fb939b186ef673408ce5dd5b607579d, type: 3}
   _characterTransform: {fileID: 803544278510457251}
