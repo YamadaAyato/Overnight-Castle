@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2674125775324583647, guid: 06eb0e679b618c744834040da227a405, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 06eb0e679b618c744834040da227a405, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -124,11 +124,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarpenterBeaverAnim
   _image: {fileID: 6391320195168376948}
   _imageType: 0
-  _normalSprite: {fileID: 4573941519233148323, guid: ce2ad6ec2a98af4459576495cbe04005, type: 3}
-  _failureSprite: {fileID: 3396158014033992037, guid: d0c7ec41aa8d584458e02696d81816f5, type: 3}
-  _happySprite: {fileID: -5983582105824680646, guid: 949eb31b775d22c46bf8ff631e89052b, type: 3}
-  _highScoreSprite: {fileID: 0}
-  _skillImageSprite: {fileID: 0}
+  _normalSprite: {fileID: 21300000, guid: ce2ad6ec2a98af4459576495cbe04005, type: 3}
+  _failureSprite: {fileID: 21300000, guid: d0c7ec41aa8d584458e02696d81816f5, type: 3}
+  _happySprite: {fileID: 21300000, guid: 949eb31b775d22c46bf8ff631e89052b, type: 3}
+  _highScoreSprite: {fileID: 21300000, guid: 06eb0e679b618c744834040da227a405, type: 3}
+  _skillImageSprite: {fileID: 21300000, guid: 06eb0e679b618c744834040da227a405, type: 3}
   _characterTransform: {fileID: 7018723292125485445}
   _rotateAngle: 11
   _rotateDuration: 1
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4178083504168466916, guid: 6aa2abbb631b6d443b99335b15a78fb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6aa2abbb631b6d443b99335b15a78fb7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4573941519233148323, guid: ce2ad6ec2a98af4459576495cbe04005, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce2ad6ec2a98af4459576495cbe04005, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
