@@ -1,13 +1,13 @@
 using DG.Tweening;
-using System;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
+using TMPro;
 
 public class CharacterSelectButton : MonoBehaviour
 {
     [SerializeField] private Button _button;
     [SerializeField] private Image _icon;
+    [SerializeField] private TMP_Text _characterName;
     [SerializeField] private GameObject _chackImage;
     [SerializeField] private Image _backImage;
     [SerializeField] private Sprite _changeImage;
@@ -83,8 +83,12 @@ public class CharacterSelectButton : MonoBehaviour
         _selectData = selectData;
         _index = index;
         _manager = manager;
+        if (_selectData.SelectedCharacterSprite == null) 
+        {
 
-        _icon.sprite = _selectData.CharacterSprite;
+        }
+        _icon.sprite = _selectData.SelectedCharacterSprite;
+        _characterName.text = _selectData.CharacterName;
 
         _button.onClick.AddListener(OnClick);
 

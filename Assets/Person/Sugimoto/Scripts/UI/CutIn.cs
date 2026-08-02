@@ -1,53 +1,81 @@
 using DG.Tweening;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CutInAnimation : MonoBehaviour
 {
-    [SerializeField] private Image _cutInImage;
+    [SerializeField] private GameObject _cutInPanel;
+    [SerializeField] private RectMask2D _rectMask;
+
     [SerializeField] private float _showTime = 0.3f;
     [SerializeField] private float _waitTime = 1f;
     [SerializeField] private float _hideTime = 0.3f;
 
+    private Image _charHead; 
+    private Image _charBode;
     private Sequence _sequence;
+    private Vector4 _defaultPadding;
 
+    private void Awake()
+    {
+        _cutInPanel.SetActive(false);
+        _defaultPadding = _rectMask.padding;
+    }
+
+    /// <summary>
+    /// セットアップ
+    /// </summary>
+    /// <param name="image"></param>
+    /// <param name="image2"></param>
+    public void Initialize(Image image, Image image2)
+    {
+        _charHead = image;
+        _charBode = image2;
+    }
+
+    /// <summary>
+    /// カットインアニメーション
+    /// </summary>
     public void PlayCutIn()
     {
+        _rectMask.padding = _defaultPadding;
+
         _sequence?.Kill();
 
-        _cutInImage.gameObject.SetActive(true);
-
-        // 左から右へ表示する設定
-        _cutInImage.fillOrigin = (int)Image.OriginHorizontal.Right;
-        _cutInImage.fillAmount = 0f;
+        _cutInPanel.SetActive(true);
 
         _sequence = DOTween.Sequence();
 
-        // 0から1まで表示
+        // padding.xを現在値から200fまで変化させる
         _sequence.Append(
-            _cutInImage.DOFillAmount(1f, _showTime)
-                .SetEase(Ease.OutQuad)
+            DOTween.To(
+                () => _rectMask.padding.x,
+                value =>
+                {
+                    Vector4 padding = _rectMask.padding;
+                    padding.x = value;
+                    _rectMask.padding = padding;
+                },
+                200f,
+                _showTime
+            ).SetEase(Ease.OutQuad)
         );
 
-        // 表示したまま少し待つ
+        _sequence.Append(
+            DOTween.To(
+                () => _rectMask.padding.z,
+                value =>
+                {
+                    Vector4 padding = _rectMask.padding;
+                    padding.z = value;
+                    _rectMask.padding = padding;
+                },
+                800f,
+                _showTime
+            ).SetEase(Ease.OutQuad)
+        );
+
         _sequence.AppendInterval(_waitTime);
-
-        // 右から左へ消えるように変更
-        _sequence.AppendCallback(() =>
-        {
-            _cutInImage.fillOrigin =
-                (int)Image.OriginHorizontal.Left;
-        });
-
-        // 1から0まで消す
-        _sequence.Append(
-            _cutInImage.DOFillAmount(0f, _hideTime)
-                .SetEase(Ease.InQuad)
-        );
-
-        _sequence.OnComplete(() =>
-        {
-            _cutInImage.gameObject.SetActive(false);
-        });
     }
 }
