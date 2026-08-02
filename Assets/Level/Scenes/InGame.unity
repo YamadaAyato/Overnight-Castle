@@ -612,6 +612,7 @@ MonoBehaviour:
   _stopLinearVelocityThreshold: 0.2
   _stopAngularVelocityThreshold: 2
   _requiredStopDuration: 1
+  _forceGameEndTime: 5
 --- !u!114 &128289742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -800,8 +801,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterImageSpawner
   _spawnParent: {fileID: 44069686}
   _characterPrefabs:
-  - characterType: 0
-    prefab: {fileID: 7985926403273718051, guid: c09adbd4d116b8441a4662f398ba17cd, type: 3}
+  - _characterType: 0
+    _prefab: {fileID: 7985926403273718051, guid: c09adbd4d116b8441a4662f398ba17cd, type: 3}
+  _reactionDuration: 2
 --- !u!1 &186715479
 GameObject:
   m_ObjectHideFlags: 0
@@ -3799,6 +3801,7 @@ MonoBehaviour:
   _scoreUI: {fileID: 1464370518}
   _cameraAnimation: {fileID: 166631142}
   _targetCamera: {fileID: 2114134799}
+  _characterImageManager: {fileID: 175752075}
   _returnSceneName: Assets/Level/Scenes/Title.unity
 --- !u!114 &1464370518
 MonoBehaviour:
