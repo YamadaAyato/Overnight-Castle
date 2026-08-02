@@ -3789,7 +3789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db0b9bcd9fb6c747947ade87b5a3776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScoreSender
-  _boardNumber: 0
+  _boardNumber: 1
 --- !u!114 &1464370517
 MonoBehaviour:
   m_ObjectHideFlags: 0
