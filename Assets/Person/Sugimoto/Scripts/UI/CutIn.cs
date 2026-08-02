@@ -12,15 +12,15 @@ public class CutInAnimation : MonoBehaviour
     [SerializeField] private float _waitTime = 1f;
     [SerializeField] private float _hideTime = 0.3f;
 
-    private Image _charHead; 
-    private Image _charBode;
+    [SerializeField]private Image _charHead; 
+    [SerializeField]private Image _charBode;
     private Sequence _sequence;
     private Vector4 _defaultPadding;
 
     private void Awake()
     {
-        _cutInPanel.SetActive(false);
         _defaultPadding = _rectMask.padding;
+        _cutInPanel.SetActive(false);
     }
 
     /// <summary>
