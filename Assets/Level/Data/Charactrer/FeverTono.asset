@@ -19,3 +19,5 @@ MonoBehaviour:
   _additionalPieceSet: {fileID: 11400000, guid: e6482879777a93540a98da173ad0f811, type: 2}
   _skill1: {fileID: 11400000, guid: 8e6af65a0e9c5714fb1ad50ffffc1a89, type: 2}
   _skill2: {fileID: 11400000, guid: 0bbc8bba0dfceed4d855231b5a7b90eb, type: 2}
+  _charHead: {fileID: 21300000, guid: deaf64e2859d1384aa566da8ebea0882, type: 3}
+  _charBody: {fileID: 21300000, guid: b077ea6c5de3eb04b90b87cb71812681, type: 3}
