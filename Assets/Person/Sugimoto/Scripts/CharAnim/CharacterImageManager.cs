@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +8,19 @@ public class CharacterImageManager : MonoBehaviour
     [Serializable]
     private class CharacterPrefab
     {
-        public CharacterType characterType;
-        public ChangeImageAnimBase prefab;
+        public CharacterType characterType => _characterType;
+        public ChangeImageAnimBase prefab => _prefab;
+
+        [SerializeField] private CharacterType _characterType;
+        [SerializeField] private ChangeImageAnimBase _prefab;
     }
 
     [SerializeField] private Transform _spawnParent;
     [SerializeField] private List<CharacterPrefab> _characterPrefabs;
+    [SerializeField] private float _reactionDuration;
 
     private ChangeImageAnimBase _currentInstance;
+    private Tween _returnTween;
 
     /// <summary>
     /// 指定されたキャラにあったプレハブを生成する
@@ -32,17 +38,53 @@ public class CharacterImageManager : MonoBehaviour
         }
 
         _currentInstance = Instantiate(data.prefab, _spawnParent);
-
-        // 初期状態の画像、アニメーションを反映
-        _currentInstance.PlayImageType();
+        _currentInstance.SetImageType(ImageType.Normal);
     }
 
     /// <summary>
-    /// 指定の遷移のアニメーションを再生する
+    ///     指定した画像状態へ変更する
     /// </summary>
-    /// <param name="imageType"></param>
-    public void playAnim(ImageType imageType) 
+    /// <param name="imageType">変更する画像状態</param>
+    public void PlayAnimation(ImageType imageType)
     {
+        if (_currentInstance == null)
+        {
+            return;
+        }
+
+        _returnTween?.Kill();
         _currentInstance.SetImageType(imageType);
+    }
+
+    /// <summary>
+    ///     指定した画像状態を一時的に再生する
+    /// </summary>
+    /// <param name="imageType">変更する画像状態</param>
+    public void PlayReaction(ImageType imageType)
+    {
+        if (_currentInstance == null)
+        {
+            return;
+        }
+
+        _returnTween?.Kill();
+        _currentInstance.SetImageType(imageType);
+
+        _returnTween = DOVirtual
+            .DelayedCall(
+                _reactionDuration,
+                () =>
+                {
+                    if (_currentInstance != null)
+                    {
+                        _currentInstance.SetImageType(ImageType.Normal);
+                    }
+                })
+            .SetLink(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        _returnTween?.Kill();
     }
 }
