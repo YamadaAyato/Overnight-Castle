@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31ccd45ebb82ba46a78007f2ba5c618, type: 3}
+  m_Name: ninja1
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSkillDefinition
+  _skillName: "\u304F\u3059\u306D\u30BF\u30A4\u30E0"
+  _skillDescription: "15\u79D2\u9593\u5236\u9650\u6642\u9593\u3092\u5897\u3084\u3057\u3001\u3044\u3044\u3082\u306E\u304C\u632F\u3063\u3066\u304F\u308B\u3088\u3046\u306B\u306A\u308B"
+  _skillEffects:
+  - rid: 1502611329049952344
+  - rid: 1502611329049952345
+  - rid: 1502611329049952346
+  references:
+    version: 2
+    RefIds:
+    - rid: 1502611329049952344
+      type: {class: AddTimeSkill, ns: , asm: Assembly-CSharp}
+      data:
+        _addTimeAmount: 15
+    - rid: 1502611329049952345
+      type: {class: TimedSpawnWeightSkill, ns: , asm: Assembly-CSharp}
+      data:
+        _pieceType: 1
+        _spawnWeightMultiplier: 1.4
+        _duration: 15
+    - rid: 1502611329049952346
+      type: {class: TimedSpawnWeightSkill, ns: , asm: Assembly-CSharp}
+      data:
+        _pieceType: 2
+        _spawnWeightMultiplier: 0.9
+        _duration: 15

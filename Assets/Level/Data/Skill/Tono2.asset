@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e31ccd45ebb82ba46a78007f2ba5c618, type: 3}
-  m_Name: BonusPieceCount+
+  m_Name: Tono2
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSkillDefinition
-  _skillName: "\u30DC\u30FC\u30CA\u30B9\u5897\u52A0"
-  _skillDescription: "\u30DC\u30FC\u30CA\u30B9\u306E\u30D4\u30FC\u30B9\u3092\u5897\u52A0\u3057\u307E\u3059"
+  _skillName: "\u4E00\u6383"
+  _skillDescription: "\u30DE\u30A4\u30CA\u30B9\u52B9\u679C\u306E\u30D1\u30FC\u30C4\u30922\u500B\u524A\u9664\u3059\u308B"
   _skillEffects:
-  - rid: 597210301096525913
+  - rid: 1502611329049952335
   references:
     version: 2
     RefIds:
-    - rid: 597210301096525913
-      type: {class: DropCountSpawnWeightSkill, ns: , asm: Assembly-CSharp}
+    - rid: 1502611329049952335
+      type: {class: RemoveBoardPieceSkill, ns: , asm: Assembly-CSharp}
       data:
-        _pieceType: 1
-        _spawnWeightMultiplier: 2
-        _drawCount: 3
+        _targetPieceType: 2
+        _boardPieceTargetMode: 0
+        _count: 2
