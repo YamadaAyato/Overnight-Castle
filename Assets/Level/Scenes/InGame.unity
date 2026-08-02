@@ -608,6 +608,7 @@ MonoBehaviour:
   _characterDefinition: {fileID: 11400000, guid: c32501812dc25c545b77dea18443cbd4, type: 2}
   _dayCycleBackgroundView: {fileID: 243012154}
   _dayNightCycle: {fileID: 243012155}
+  _cutIn: {fileID: 1122444107}
   _stopLinearVelocityThreshold: 0.2
   _stopAngularVelocityThreshold: 2
   _requiredStopDuration: 1
@@ -2434,6 +2435,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
   m_AspectMode: 2
   m_AspectRatio: 10.6667
+--- !u!114 &869873369 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6608539337067893721, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+  m_PrefabInstance: {fileID: 1287029199}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &982236824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2649,6 +2661,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1303543788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1122444107 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8200168688487642509, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+  m_PrefabInstance: {fileID: 1287029199}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313edd1d087f84f4eb53970450416ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CutInAnimation
 --- !u!1 &1174547971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2863,6 +2886,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8200168688487642509, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+      propertyPath: _charBody
+      value: 
+      objectReference: {fileID: 869873369}
+    - target: {fileID: 8200168688487642509, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+      propertyPath: _firstSkillIcon
+      value: 
+      objectReference: {fileID: 2007854819}
+    - target: {fileID: 8200168688487642509, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+      propertyPath: _secondSkillIcon
+      value: 
+      objectReference: {fileID: 2042857741}
+    - target: {fileID: 8200168688487642509, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+      propertyPath: _usedSkillColor.b
+      value: 0.4641509
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200168688487642509, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+      propertyPath: _usedSkillColor.g
+      value: 0.4641509
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200168688487642509, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+      propertyPath: _usedSkillColor.r
+      value: 0.4641509
+      objectReference: {fileID: 0}
     - target: {fileID: 8544769510267214862, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2957,7 +3004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9044317054138997488, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
       propertyPath: m_Padding.x
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9044317054138997488, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
       propertyPath: m_Padding.z

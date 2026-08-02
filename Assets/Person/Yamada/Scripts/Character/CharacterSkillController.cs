@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -16,6 +17,9 @@ public class CharacterSkillController : MonoBehaviour
 
     /// <summary> 2つ目のスキルが使用済みかどうかを示すプロパティ </summary>
     public bool IsSecondSkillUsed => _secondSkillRuntime?.IsUsed ?? false;
+
+    /// <summary> スキルが使用されたときに発火するイベント </summary>
+    public event Action<CharacterSkillSlot, CharacterSkillDefinition> OnSkillUsed;
 
     /// <summary>
     ///     CharacterSkillControllerを初期化します。
@@ -109,6 +113,8 @@ public class CharacterSkillController : MonoBehaviour
         {
             return false;
         }
+
+        OnSkillUsed?.Invoke(skillSlot, skillRuntime.Definition);
 
         return true;
     }
