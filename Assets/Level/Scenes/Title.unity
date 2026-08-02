@@ -1527,11 +1527,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   _bgmPlayer: {fileID: 0}
-  _seList: []
+  _seList:
+  - _clip: {fileID: 8300000, guid: 59412f16c7b3e844ba4dc49541be4204, type: 3}
+    _name: resultText
+    _volume: 0.1
+  - _clip: {fileID: 8300000, guid: ffc6596cd02da554e950abf4e3635424, type: 3}
+    _name: Button
+    _volume: 0.1
+  - _clip: {fileID: 8300000, guid: 05ca67ff0de6b634f8fc165db045f138, type: 3}
+    _name: Explosion
+    _volume: 0.1
+  - _clip: {fileID: 8300000, guid: 2d6307d21381c6b46ba1b22a094f633a, type: 3}
+    _name: Cutin
+    _volume: 0.1
   _bgmList:
-  - _clip: {fileID: 8300000, guid: c58e1e0235ef3c443bcfee0754d615fd, type: 3}
+  - _clip: {fileID: 8300000, guid: 6a39fbd8b3347b14eabcc3744970e37a, type: 3}
     _name: TitleBGM
-    _volume: 0.3
+    _volume: 0.1
+  - _clip: {fileID: 8300000, guid: 445fb96dd834e7c44be95f9c7ece3248, type: 3}
+    _name: InGameBGM
+    _volume: 0.1
 --- !u!4 &899920771
 Transform:
   m_ObjectHideFlags: 0
@@ -1639,7 +1654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1018091025
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1768,7 +1783,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1060917293
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1842,7 +1857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.19692326, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

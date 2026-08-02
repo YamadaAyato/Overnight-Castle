@@ -206,4 +206,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   _explosionEffect: {fileID: 7249313980858258711, guid: dfff004b77f2fd24cbb8fe2e49c56731, type: 3}
-  _explosionSEName: 
+  _explosionSEName: Explosion
