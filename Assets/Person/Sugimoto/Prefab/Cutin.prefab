@@ -105,6 +105,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6331940668727063468}
+  - {fileID: 1556999569246072680}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -126,6 +127,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RectMask2D
   m_Padding: {x: 1000, y: -360, z: 0, w: -220}
   m_Softness: {x: 0, y: 0}
+--- !u!1 &3132058326185434699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1556999569246072680}
+  - component: {fileID: 8200168688487642509}
+  m_Layer: 0
+  m_Name: CutInAnimation (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1556999569246072680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3132058326185434699}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 39.377666, y: 40.06934, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8544769510267214862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8200168688487642509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3132058326185434699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313edd1d087f84f4eb53970450416ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CutInAnimation
+  _cutInPanel: {fileID: 2384059092260025517}
+  _rectMask: {fileID: 9044317054138997488}
+  _showTime: 0.5
+  _waitTime: 0.5
+  _hideTime: 1
+  _charHead: {fileID: 8486399810809262809}
+  _charBode: {fileID: 6608539337067893721}
 --- !u!1 &3645964259474006665
 GameObject:
   m_ObjectHideFlags: 0
