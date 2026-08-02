@@ -103,6 +103,5 @@ public class AudioManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         _bgmPlayer = GetComponentInChildren<AudioSource>();
-        PlayBGM("BGM");
     }
 }
