@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31ccd45ebb82ba46a78007f2ba5c618, type: 3}
+  m_Name: ninja2
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSkillDefinition
+  _skillName: "\u3053\u308C\u3044\u3089\u306A\uFF5E\u3044"
+  _skillDescription: "\u30DE\u30A4\u30CA\u30B9\u52B9\u679C\u306E\u30D1\u30FC\u30C4\u30925\u500B\u524A\u9664\u3059\u308B\n5\u56DE\u3000\u3044\u3044\u3082\u306E\u304C\u3067\u3084\u3059\u304F\u306A\u308B"
+  _skillEffects:
+  - rid: 1502611329049952335
+  - rid: 1502611329049952348
+  - rid: 1502611329049952349
+  references:
+    version: 2
+    RefIds:
+    - rid: 1502611329049952335
+      type: {class: RemoveBoardPieceSkill, ns: , asm: Assembly-CSharp}
+      data:
+        _targetPieceType: 2
+        _boardPieceTargetMode: 0
+        _count: 5
+    - rid: 1502611329049952348
+      type: {class: DropCountSpawnWeightSkill, ns: , asm: Assembly-CSharp}
+      data:
+        _pieceType: 0
+        _spawnWeightMultiplier: 1.1
+        _drawCount: 5
+    - rid: 1502611329049952349
+      type: {class: DropCountSpawnWeightSkill, ns: , asm: Assembly-CSharp}
+      data:
+        _pieceType: 1
+        _spawnWeightMultiplier: 1.1
+        _drawCount: 5

@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e31ccd45ebb82ba46a78007f2ba5c618, type: 3}
-  m_Name: AddTime
+  m_Name: bi-ba-1
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSkillDefinition
-  _skillName: "\u6642\u9593\u8FFD\u52A0"
-  _skillDescription: "\u5236\u9650\u6642\u9593\u3092+\u3057\u307E\u3059"
+  _skillName: "\u30C0\u30E0\u5EFA\u8A2D"
+  _skillDescription: "10\u56DE\u306E\u9593\u3044\u3044\u3082\u306E\u304C\u3067\u3084\u3059\u304F\u306A\u308B"
   _skillEffects:
-  - rid: 597210301096525912
+  - rid: 1502611329049952350
   references:
     version: 2
     RefIds:
-    - rid: 597210301096525912
-      type: {class: AddTimeSkill, ns: , asm: Assembly-CSharp}
+    - rid: 1502611329049952350
+      type: {class: DropCountSpawnWeightSkill, ns: , asm: Assembly-CSharp}
       data:
-        _addTimeAmount: 10
+        _pieceType: 1
+        _spawnWeightMultiplier: 1.3
+        _drawCount: 10
