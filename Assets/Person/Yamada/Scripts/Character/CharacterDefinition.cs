@@ -28,15 +28,26 @@ public class CharacterDefinition : ScriptableObject
     /// <summary> スキル2の定義 </summary>
     public CharacterSkillDefinition Skill2 => _skill2;
 
+    /// <summary> スキルカットインのキャラクター頭部スプライト </summary>
+    public Sprite CharHead => _charHead;
+
+    /// <summary> スキルカットインのキャラクター胴体スプライト </summary>
+    public Sprite CharBody => _charBody;
+
     [Header("キャラクター情報")]
     [SerializeField] private string _characterName;
     [SerializeField] private Sprite _characterSprite;
     [SerializeField] private Sprite _selectedCharacterSprite;
     [SerializeField] private CharacterType _characterType;
+
     [Header("共通ピースに追加するピースセット")]
     [SerializeField] private PieceSet _additionalPieceSet;
 
     [Header("スキル設定")]
     [SerializeField] private CharacterSkillDefinition _skill1;
     [SerializeField] private CharacterSkillDefinition _skill2;
+
+    [Header("スキルカットイン設定")]
+    [SerializeField] private Sprite _charHead;
+    [SerializeField] private Sprite _charBody;
 }
