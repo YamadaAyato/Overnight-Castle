@@ -57,8 +57,8 @@ MonoBehaviour:
     _spawnWeight: 1
   - _pieceDefinition: {fileID: 11400000, guid: febe322fd596ffb41a8e13e7ec54e3b1, type: 2}
     _spawnWeight: 1
-  - _pieceDefinition: {fileID: 11400000, guid: d88bb303aee647944aa77cea913ada7a, type: 2}
-    _spawnWeight: 3
+  - _pieceDefinition: {fileID: 11400000, guid: e963a06624a097645b7103815fe0e419, type: 2}
+    _spawnWeight: 1
   - _pieceDefinition: {fileID: 11400000, guid: c2fbdc0448c757d4a8f400c6395a97da, type: 2}
     _spawnWeight: 3
   - _pieceDefinition: {fileID: 11400000, guid: 6a1b41a41df46b14f903ec156d388b9c, type: 2}
@@ -73,5 +73,7 @@ MonoBehaviour:
     _spawnWeight: 1
   - _pieceDefinition: {fileID: 11400000, guid: 78c1d0ab34d84ad4ba70ef9f15c79ec2, type: 2}
     _spawnWeight: 3
+  - _pieceDefinition: {fileID: 11400000, guid: 4d6fe398d1a17cf4b91e7549b2be5921, type: 2}
+    _spawnWeight: 2
   - _pieceDefinition: {fileID: 11400000, guid: 4d6fe398d1a17cf4b91e7549b2be5921, type: 2}
     _spawnWeight: 2
