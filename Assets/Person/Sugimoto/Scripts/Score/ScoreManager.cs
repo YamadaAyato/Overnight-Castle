@@ -32,6 +32,7 @@ public class ScoreManager : MonoBehaviour
         {
             MaxScore = ScoreResult.TotalScore;
             _characterImageManager.PlayAnimation(ImageType.HighScore);
+            _scoreSender.SendHighScore(MaxScore);
         }
 
         AudioManager.Instance.PlaySE("ResultText");
