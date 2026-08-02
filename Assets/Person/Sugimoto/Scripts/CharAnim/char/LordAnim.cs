@@ -43,9 +43,17 @@ public class LordAnim : ChangeImageAnimBase
     }
 
     /// <summary>
-    /// 失敗状態のアニメーション
+    /// 悪いものが降ってきたときのアニメーション
     /// </summary>
     protected override void PlayFailureAnimation()
+    {
+
+    }
+
+    /// <summary>
+    /// いいものが降ってきたときのアニメーション
+    /// </summary>
+    protected override void PlayHappyAnimation()
     {
 
     }
