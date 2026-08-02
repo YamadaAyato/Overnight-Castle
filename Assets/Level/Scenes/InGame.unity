@@ -3773,6 +3773,8 @@ MonoBehaviour:
   - {fileID: 1455117475}
   _inGameObjects:
   - {fileID: 1174547971}
+  - {fileID: 2007854817}
+  - {fileID: 2042857739}
   _height: {fileID: 1623302223}
   _heightScore: {fileID: 1614305572}
   _maxScoreText: {fileID: 377116794}
