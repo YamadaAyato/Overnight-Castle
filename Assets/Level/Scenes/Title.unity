@@ -477,7 +477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: -3, y: -80}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &183687985
@@ -2924,8 +2924,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 30}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -1, y: -5}
+  m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1291133613
 MonoBehaviour:
@@ -3137,7 +3137,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -30}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1453349326
 CanvasRenderer:
@@ -3797,7 +3797,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 30}
+  m_AnchoredPosition: {x: 0, y: 39}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1823713310
@@ -4954,9 +4954,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectManager
   _selectCharacterDatas:
-  - {fileID: 11400000, guid: 86be3c2dd0e017848be9b57886bcaaff, type: 2}
-  - {fileID: 11400000, guid: 86be3c2dd0e017848be9b57886bcaaff, type: 2}
-  - {fileID: 11400000, guid: 86be3c2dd0e017848be9b57886bcaaff, type: 2}
+  - {fileID: 11400000, guid: 5667b63ead1500d418a79201da46cb96, type: 2}
+  - {fileID: 11400000, guid: d60fe41f1494f2343a41451417bcc9df, type: 2}
   - {fileID: 11400000, guid: 86be3c2dd0e017848be9b57886bcaaff, type: 2}
   _characterSelectButtonPrefab: {fileID: 1599932180283422085, guid: ed0d88b7d7934694087f5cd0cae43b89, type: 3}
   _buttonParent: {fileID: 547717910}
