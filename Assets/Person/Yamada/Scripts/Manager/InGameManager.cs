@@ -37,6 +37,11 @@ public class InGameManager : MonoBehaviour
             currentHeight,
             _modifiers);
 
+        piece.OnLanded += HandlePieceLanded;
+        piece.OnDestroyed += HandlePieceFellBelowDeletePosition;
+
+        _controller.SetCurrentPiece(piece);
+
         if (piece == null)
         {
             Debug.LogError("ピースの生成に失敗しました。", this);
@@ -113,6 +118,9 @@ public class InGameManager : MonoBehaviour
             FallingPiece piece = targets[i];
             if (piece != null)
             {
+                piece.OnLanded -= HandlePieceLanded;
+                piece.OnDestroyed -= HandlePieceFellBelowDeletePosition;
+
                 _spawnedPieces.Remove(piece);
                 Destroy(piece.gameObject);
             }
@@ -168,9 +176,15 @@ public class InGameManager : MonoBehaviour
                 continue;
             }
 
+            piece.OnLanded -= HandlePieceLanded;
+            piece.OnDestroyed -= HandlePieceFellBelowDeletePosition;
+
             _spawnedPieces.Remove(piece);
             piece.gameObject.SetActive(false);
             Destroy(piece.gameObject);
+
+            convertedPiece.OnLanded += HandlePieceLanded;
+            convertedPiece.OnDestroyed += HandlePieceFellBelowDeletePosition;
 
             convertedPiece.Drop();
             _spawnedPieces.Add(convertedPiece);
@@ -270,6 +284,15 @@ public class InGameManager : MonoBehaviour
         {
             Timer.Instance.OnTimeUp -= HandleTimeUp;
         }
+
+        foreach (var piece in _spawnedPieces)
+        {
+            if (piece != null)
+            {
+                piece.OnLanded -= HandlePieceLanded;
+                piece.OnDestroyed -= HandlePieceFellBelowDeletePosition;
+            }
+        }
     }
 
     /// <summary>
@@ -337,6 +360,46 @@ public class InGameManager : MonoBehaviour
         // タイムアップ時は、ピースの操作を停止し、落下中のピースが停止するまで待機する
         _controller.StopControl();
         _ = WaitForDroppedPiecesToStopAsync();
+    }
+
+    /// <summary>
+    ///     ピースが着地したときの処理
+    /// </summary>
+    /// <param name="piece">着地したピース</param>
+    private void HandlePieceLanded(FallingPiece piece)
+    {
+        if (_isGameFinished ||
+            piece == null)
+        {
+            return;
+        }
+
+        if (piece.PieceType == PieceType.Bonus)
+        {
+            _characterImageSpawner.PlayReaction(ImageType.HappyImage);
+        }
+    }
+
+    /// <summary>
+    ///     ピースが削除位置より下へ落ちたときの処理
+    /// </summary>
+    /// <param name="piece">落下したピース</param>
+    private void HandlePieceFellBelowDeletePosition(FallingPiece piece)
+    {
+        if (piece == null)
+        {
+            return;
+        }
+
+        piece.OnLanded -= HandlePieceLanded;
+        piece.OnDestroyed -= HandlePieceFellBelowDeletePosition;
+
+        _spawnedPieces.Remove(piece);
+
+        if (!_isGameFinished)
+        {
+            _characterImageSpawner.PlayReaction(ImageType.Failure);
+        }
     }
 
     /// <summary>
