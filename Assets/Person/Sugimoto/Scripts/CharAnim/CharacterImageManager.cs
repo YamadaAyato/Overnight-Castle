@@ -15,6 +15,7 @@ public class CharacterImageManager : MonoBehaviour
     [SerializeField] private List<CharacterPrefab> _characterPrefabs;
 
     private ChangeImageAnimBase _currentInstance;
+    private CharacterType _characterType;
 
     /// <summary>
     /// 指定されたキャラにあったプレハブを生成する
@@ -22,6 +23,8 @@ public class CharacterImageManager : MonoBehaviour
     /// <param name="selectedCharacter"></param>
     public void Spawn(CharacterDefinition selectedCharacter)
     {
+        _characterType = CharacterType.Skull;
+
         CharacterPrefab data = _characterPrefabs.Find(
             x => x.characterType == selectedCharacter.CharacterType);
 
