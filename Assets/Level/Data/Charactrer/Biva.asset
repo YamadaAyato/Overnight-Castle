@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cafd9a9011d2694293506d028be6229, type: 3}
+  m_Name: Biva
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterDefinition
+  _characterName: "\u30D3\u30FC\u30D0\u30FC\u5927\u5DE5"
+  _characterSprite: {fileID: 21300000, guid: 8f319206c71956a4dad4ae603ba03eec, type: 3}
+  _selectedCharacterSprite: {fileID: 21300000, guid: 3ed332c32ace1d84586c93ea842cab7d, type: 3}
+  _characterType: 0
+  _additionalPieceSet: {fileID: 0}
+  _skill1: {fileID: 11400000, guid: 44f4e3f1dfb77c54f835f1d4941e4c7d, type: 2}
+  _skill2: {fileID: 11400000, guid: db04db17577e7ec4a99538609644939e, type: 2}
+  _charHead: {fileID: 21300000, guid: ce2ad6ec2a98af4459576495cbe04005, type: 3}
+  _charBody: {fileID: 21300000, guid: 6aa2abbb631b6d443b99335b15a78fb7, type: 3}
