@@ -186,6 +186,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private CharacterDefinition _characterDefinition;
     [SerializeField] private DayCycleBackgroundView _dayCycleBackgroundView;
     [SerializeField] private DayNightCycle _dayNightCycle;
+    [SerializeField] private CutInAnimation _cutIn;
     [SerializeField, Min(0f)] private float _stopLinearVelocityThreshold = 0.05f;
     [SerializeField, Min(0f)] private float _stopAngularVelocityThreshold = 2f;
     [SerializeField, Min(0f)] private float _requiredStopDuration = 0.5f;
@@ -229,7 +230,15 @@ public class InGameManager : MonoBehaviour
             return;
         }
 
-        if(_characterImageSpawner != null)
+        if(!_cutIn.Initialize(_characterSkillController,
+            selectedCharacter.CharHead, 
+            selectedCharacter.CharBody))
+        {
+            enabled = false;
+            return;
+        }
+
+        if (_characterImageSpawner != null)
         {
             _characterImageSpawner.Spawn(selectedCharacter);
         }
