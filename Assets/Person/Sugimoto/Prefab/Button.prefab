@@ -141,7 +141,7 @@ MonoBehaviour:
   _characterName: {fileID: 7179936304099230882}
   _chackImage: {fileID: 5169351563535816948}
   _backImage: {fileID: 5492556895739898012}
-  _changeImage: {fileID: 21300000, guid: fb6ad70c7fea4f54c9f2b2f45c88f9ae, type: 3}
+  _changeImage: {fileID: -4094990512280699354, guid: fb6ad70c7fea4f54c9f2b2f45c88f9ae, type: 3}
   _scale: 6
   _smoleScale: 4
   _time: 0.2
