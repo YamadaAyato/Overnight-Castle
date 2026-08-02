@@ -522,11 +522,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2085107988}
         m_TargetAssemblyTypeName: CharacterImageManager, Assembly-CSharp
-        m_MethodName: Spawn
-        m_Mode: 2
+        m_MethodName: Text
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: c32501812dc25c545b77dea18443cbd4, type: 2}
-          m_ObjectArgumentAssemblyTypeName: CharacterDefinition, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -738,10 +738,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterImageSpawner
   _spawnParent: {fileID: 848156117}
   _characterPrefabs:
-  - characterType: 0
-    prefab: {fileID: 7985926403273718051, guid: c09adbd4d116b8441a4662f398ba17cd, type: 3}
-  - characterType: 1
-    prefab: {fileID: 4183265320577691045, guid: a67561b9d1be2d24894a1b70870ad8a7, type: 3}
+  - _characterType: 0
+    _prefab: {fileID: 0}
+  - _characterType: 0
+    _prefab: {fileID: 0}
+  - _characterType: 2
+    _prefab: {fileID: 5810055104753580641, guid: afa0500285346b54cae0378ee85010c3, type: 3}
+  _reactionDuration: 0
 --- !u!4 &2085107989
 Transform:
   m_ObjectHideFlags: 0
