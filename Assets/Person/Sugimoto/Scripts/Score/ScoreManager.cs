@@ -22,6 +22,8 @@ public class ScoreManager : MonoBehaviour
 
     private bool _isReturnedToTitle = false;
 
+    private const string MaxScoreKey = "MaxScore";
+
     public void SetCastleScoreResult(CastleScoreResult castleScoreResult)
     {
         _targetCamera.SetTrackingEnabled(false);
@@ -31,6 +33,10 @@ public class ScoreManager : MonoBehaviour
         if (isMax)
         {
             MaxScore = ScoreResult.TotalScore;
+
+            PlayerPrefs.SetInt(MaxScoreKey, MaxScore);
+            PlayerPrefs.Save();
+
             _characterImageManager.PlayAnimation(ImageType.HighScore);
             _scoreSender.SendHighScore(MaxScore);
         }
@@ -79,4 +85,9 @@ public class ScoreManager : MonoBehaviour
         GameSession.Clear();
         SceneLoader.LoadScene(_returnSceneName);
     }
+    private void Awake()
+    {
+        MaxScore = PlayerPrefs.GetInt(MaxScoreKey, 0);
+    }
+
 }
