@@ -200,7 +200,7 @@ MonoBehaviour:
   _moveX: 10
   _moveXDuration: 0.3
   _moveXInterval: 0.1
-  _carTransform: {fileID: 37229331114798021}
+  _KunoichiTransform: {fileID: 37229331114798021}
   _moveDownAmount: 200
   _downDuration: 0.5
 --- !u!1 &5331868884344072431
