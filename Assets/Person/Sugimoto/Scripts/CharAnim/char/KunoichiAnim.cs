@@ -12,7 +12,7 @@ public class KunoichiAnim : ChangeImageAnimBase
     [SerializeField] private float _moveX = 100f;
     [SerializeField] private float _moveXDuration = 0.3f;
     [SerializeField, Min(0f)] private float _moveXInterval = 1f;
-    [SerializeField] private RectTransform _carTransform;
+    [SerializeField] private RectTransform _KunoichiTransform;
 
     [Header("Failure Animation")]
     [SerializeField] private float _moveDownAmount = 200f;
@@ -23,7 +23,7 @@ public class KunoichiAnim : ChangeImageAnimBase
     /// </summary>
     protected override void PlayNormalAnimation()
     {
-        if (_carTransform == null)
+        if (_KunoichiTransform == null)
         {
             Debug.LogError("_carTransformが設定されていません。", this);
             return;
@@ -31,32 +31,32 @@ public class KunoichiAnim : ChangeImageAnimBase
 
         _animation?.Kill();
 
-        Vector2 defaultPosition = _carTransform.anchoredPosition;
+        Vector2 defaultPosition = _KunoichiTransform.anchoredPosition;
         float leftX = defaultPosition.x - _moveX;
         float rightX = defaultPosition.x + _moveX;
 
         Sequence sequence = DOTween.Sequence();
 
         sequence.Append(
-            _carTransform
+            _KunoichiTransform
                 .DOAnchorPosX(leftX, _moveXDuration)
                 .SetEase(Ease.InOutSine)
         );
 
         sequence.Append(
-            _carTransform
+            _KunoichiTransform
                 .DOAnchorPosX(defaultPosition.x, _moveXDuration)
                 .SetEase(Ease.InOutSine)
         );
 
         sequence.Append(
-            _carTransform
+            _KunoichiTransform
                 .DOAnchorPosX(rightX, _moveXDuration)
                 .SetEase(Ease.InOutSine)
         );
 
         sequence.Append(
-            _carTransform
+            _KunoichiTransform
                 .DOAnchorPosX(defaultPosition.x, _moveXDuration)
                 .SetEase(Ease.InOutSine)
         );
