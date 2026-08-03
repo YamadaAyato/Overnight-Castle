@@ -4957,6 +4957,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5667b63ead1500d418a79201da46cb96, type: 2}
   - {fileID: 11400000, guid: d60fe41f1494f2343a41451417bcc9df, type: 2}
   - {fileID: 11400000, guid: 86be3c2dd0e017848be9b57886bcaaff, type: 2}
+  - {fileID: 11400000, guid: 3bd5738affddfd945893918dc1b1047a, type: 2}
   _characterSelectButtonPrefab: {fileID: 1599932180283422085, guid: ed0d88b7d7934694087f5cd0cae43b89, type: 3}
   _buttonParent: {fileID: 547717910}
   _characterImage: {fileID: 741517563}

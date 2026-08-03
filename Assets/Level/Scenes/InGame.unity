@@ -808,6 +808,8 @@ MonoBehaviour:
     _prefab: {fileID: 4183265320577691045, guid: a67561b9d1be2d24894a1b70870ad8a7, type: 3}
   - _characterType: 2
     _prefab: {fileID: 5810055104753580641, guid: afa0500285346b54cae0378ee85010c3, type: 3}
+  - _characterType: 3
+    _prefab: {fileID: 5762972489559264810, guid: 53ab59036f58bb24fbcf39583890c8f0, type: 3}
   _reactionDuration: 2
 --- !u!1 &186715479
 GameObject:
@@ -2893,6 +2895,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3351224104849838275, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 81.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608539337067893721, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b077ea6c5de3eb04b90b87cb71812681, type: 3}
     - target: {fileID: 8200168688487642509, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
       propertyPath: _charBody
       value: 
@@ -2917,6 +2927,10 @@ PrefabInstance:
       propertyPath: _usedSkillColor.r
       value: 0.4641509
       objectReference: {fileID: 0}
+    - target: {fileID: 8486399810809262809, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fb939b186ef673408ce5dd5b607579d, type: 3}
     - target: {fileID: 8544769510267214862, guid: 4845a7f100802c449a0ce06a88cc3980, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
