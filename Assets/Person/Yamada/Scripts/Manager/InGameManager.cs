@@ -80,7 +80,7 @@ public class InGameManager : MonoBehaviour
             _stageSettings.HeightScoreMultiplier);
 
         _scoreManager.SetCastleScoreResult(result);
-        
+
         Debug.Log($"ゲーム終了: 高さ={result.Height}, " +
             $"高さスコア={result.HeightScore}, " +
             $"完成度スコア={result.CompletionScore}, " +
@@ -244,8 +244,8 @@ public class InGameManager : MonoBehaviour
             return;
         }
 
-        if(!_cutIn.Initialize(_characterSkillController,
-            selectedCharacter.CharHead, 
+        if (!_cutIn.Initialize(_characterSkillController,
+            selectedCharacter.CharHead,
             selectedCharacter.CharBody))
         {
             enabled = false;
@@ -393,7 +393,7 @@ public class InGameManager : MonoBehaviour
 
         FallingPiece timeUpPiece = _spawner.CreatePiece(
             _timeUpPieceDefinition,
-            _spawner.SpawnPos,
+            _spawner.SpawnPos + new Vector3(0, -2, 0),
             Quaternion.identity);
 
         if (timeUpPiece == null)
